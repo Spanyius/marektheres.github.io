@@ -969,6 +969,7 @@
           <p class="closing-rsvp-copy" data-i18n="rsvpCopy">To help us with the final arrangements, please let us know whether you will be able to join us.</p>
           <p class="closing-rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Please RSVP by</span><strong data-i18n="rsvpDeadlineDate">31 October 2026</strong></p>
           <p class="closing-rsvp-note" data-i18n="rsvpNote">When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.</p>
+	  <p class="closing-rsvp-phone"><span data-i18n="rsvpPhoneIntro">Prefer to reply by phone?</span> <a href="tel:+420606546270">Marek&nbsp; +420&nbsp;606&nbsp;546&nbsp;270</a><span aria-hidden="true"> · </span><a href="tel:+46730284940">Theres&nbsp; +46&nbsp;730&nbsp;284&nbsp;940</a></p>
         </div>
 
         <div class="closing-actions">
@@ -985,7 +986,7 @@
   </footer>
 
   <div class="music-player" id="youtubeMusic" aria-hidden="true"></div>
-  <button class="music-toggle is-loading" id="musicToggle" type="button" aria-label="Loading Christmas music" data-tooltip="Loading Christmas music">
+  <button class="music-toggle is-loading is-muted" id="musicToggle" type="button" aria-label="Loading Christmas music" data-tooltip="Loading Christmas music">
     <span class="music-icon" aria-hidden="true">♫</span>
     <span class="music-slash" aria-hidden="true"></span>
   </button>
@@ -1312,13 +1313,11 @@
     document.getElementById('calendarButton').addEventListener('click', downloadCalendar);
     document.getElementById('calendarButtonBottom').addEventListener('click', downloadCalendar);
 
-    // Christmas jazz ambience. The invitation always attempts audible autoplay.
-    // Modern browsers may block sound until the first user gesture; when that happens,
-    // the first interaction anywhere on the invitation retries playback WITH sound.
-    // The page never automatically falls back to muted playback.
+    // Christmas jazz ambience. Start playback muted so autoplay is browser-friendly.
+    // Guests can turn the music on or off using the floating music button.
     let musicPlayer = null;
     let musicReady = false;
-    let musicUserMuted = false;
+    let musicUserMuted = true;
     const christmasVideoId = 'fj0WVcj93to';
     const christmasStartSeconds = 936; // Instrumental jazz section in the selected no-copyright mix.
 
@@ -1346,30 +1345,6 @@
       musicPlayer.playVideo();
       setMusicButtonState({ muted: true, paused: false });
     }
-
-    function removeMusicUnlockListeners() {
-      document.removeEventListener('pointerdown', unlockMusicOnGesture, true);
-      document.removeEventListener('keydown', unlockMusicOnGesture, true);
-    }
-
-    function unlockMusicOnGesture(event) {
-      // Do not pre-handle the dedicated control; its click handler owns that action.
-      if (musicToggle.contains(event.target) || musicUserMuted || !musicReady || !musicPlayer) return;
-      const state = musicPlayer.getPlayerState();
-      if (state === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
-        removeMusicUnlockListeners();
-        return;
-      }
-      startMusicAudible();
-      window.setTimeout(() => {
-        if (musicPlayer && musicPlayer.getPlayerState() === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
-          removeMusicUnlockListeners();
-        }
-      }, 180);
-    }
-
-    document.addEventListener('pointerdown', unlockMusicOnGesture, true);
-    document.addEventListener('keydown', unlockMusicOnGesture, true);
 
     musicToggle.addEventListener('click', () => {
       if (!musicReady || !musicPlayer) return;
@@ -1399,29 +1374,15 @@
         events: {
           onReady(event) {
             musicReady = true;
+            musicUserMuted = true;
             event.target.setVolume(22);
-            event.target.unMute();
+            event.target.mute();
             event.target.playVideo();
-            setMusicButtonState({ loading: true, muted: false, paused: false });
-
-            window.setTimeout(() => {
-              const playing = event.target.getPlayerState() === YT.PlayerState.PLAYING;
-              const muted = event.target.isMuted();
-              if (playing && !muted) {
-                setMusicButtonState({ muted: false, paused: false });
-                removeMusicUnlockListeners();
-              } else {
-                // Sound autoplay was blocked. Keep it unmuted and retry on the guest's
-                // first interaction with the page instead of silently playing muted.
-                event.target.unMute();
-                setMusicButtonState({ muted: false, paused: true });
-              }
-            }, 1200);
+            setMusicButtonState({ loading: false, muted: true, paused: false });
           },
           onStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
-              setMusicButtonState({ muted: false, paused: false });
-              removeMusicUnlockListeners();
+            if (event.data === YT.PlayerState.PLAYING) {
+              setMusicButtonState({ muted: musicPlayer.isMuted(), paused: false });
             }
             if (event.data === YT.PlayerState.ENDED) {
               musicPlayer.seekTo(christmasStartSeconds, true);
