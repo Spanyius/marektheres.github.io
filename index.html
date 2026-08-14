@@ -8,7 +8,7 @@
   <title>Marek & Theres — 12.12.2026</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Italianno&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Italianno&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
 
     :root {
       --burgundy-950: #300912;
@@ -27,6 +27,7 @@
       --shadow: 0 28px 70px rgba(35, 5, 12, .20);
       --serif: "Bodoni Moda", "Bodoni MT", Didot, Georgia, serif;
       --script: "Italianno", "Bickham Script Pro", "Snell Roundhand", cursive;
+      --arabic: "Noto Naskh Arabic", Tahoma, Arial, sans-serif;
       --nav-h: 76px;
     }
 
@@ -62,6 +63,444 @@
       font-variation-settings: normal;
       font-optical-sizing: auto;
     }
+
+    /* Full-screen wax-sealed envelope entrance.
+       V10 uses the same animation mechanics and timing as the supplied reference:
+       top flap flip -> letter rises and returns in front -> upper fold -> lower fold. */
+    body.invitation-locked { overflow: hidden; }
+
+    body.has-invitation-gate .site-header,
+    body.has-invitation-gate main,
+    body.has-invitation-gate .footer,
+    body.has-invitation-gate .music-toggle {
+      transition:
+        opacity 2.05s cubic-bezier(.16,1,.3,1) .12s,
+        transform 2.15s cubic-bezier(.16,1,.3,1) .12s,
+        filter 1.9s ease .12s;
+      will-change: opacity, transform, filter;
+    }
+
+    body.has-invitation-gate.invitation-locked .site-header,
+    body.has-invitation-gate.invitation-locked main,
+    body.has-invitation-gate.invitation-locked .footer,
+    body.has-invitation-gate.invitation-locked .music-toggle {
+      opacity: 0;
+      transform: translateY(10px) scale(.988);
+      filter: blur(3px);
+      pointer-events: none;
+    }
+
+    .invitation-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+      color: var(--ivory);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(124,33,50,.35), transparent 33%),
+        radial-gradient(circle at 14% 18%, rgba(213,194,151,.08) 0 1px, transparent 1.7px) 0 0 / 30px 30px,
+        radial-gradient(circle at 82% 72%, rgba(255,255,255,.045) 0 1px, transparent 1.6px) 0 0 / 38px 38px,
+        linear-gradient(145deg, var(--burgundy-950), var(--burgundy-800) 48%, var(--burgundy-950));
+      transition: opacity 2.05s cubic-bezier(.22,.61,.36,1), filter 2.05s ease;
+      will-change: opacity, filter;
+    }
+
+    .invitation-gate::before,
+    .invitation-gate::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border: 1px solid rgba(213,194,151,.34);
+    }
+    .invitation-gate::before { inset: 18px; }
+    .invitation-gate::after { inset: 25px; border-color: rgba(213,194,151,.14); }
+
+    .invitation-gate.is-revealing {
+      opacity: 0;
+      filter: blur(1.2px);
+      pointer-events: none;
+    }
+
+    .gate-content {
+      position: relative;
+      width: min(620px, 100%);
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      transform: translateY(-1vh);
+    }
+
+    .gate-kicker {
+      margin: 0 0 clamp(20px, 4vh, 34px);
+      color: var(--gold-soft);
+      font-family: var(--script);
+      font-size: clamp(48px, 8vw, 74px);
+      font-weight: 400;
+      line-height: .92;
+      letter-spacing: .01em;
+      text-shadow: .2px 0 currentColor, -.2px 0 currentColor;
+    }
+
+    .envelope-button {
+      position: relative;
+      width: min(500px, 86vw, calc(70dvh * 1.56));
+      aspect-ratio: 1.56 / 1;
+      display: block;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      perspective: 800px;
+      touch-action: manipulation;
+      filter: drop-shadow(0 28px 36px rgba(18,2,7,.33));
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .envelope-button:focus-visible {
+      outline: 2px solid var(--gold-soft);
+      outline-offset: 12px;
+      border-radius: 12px;
+    }
+
+    /* The envelope below intentionally mirrors the structure of the supplied example. */
+    .envelope {
+      position: absolute;
+      inset: 0;
+      display: block;
+      overflow: visible;
+      border: 1px solid rgba(184,154,98,.60);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(255,250,241,.96), rgba(246,235,217,.96)),
+        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
+      box-shadow:
+        0 0 1px rgba(0,0,0,.18),
+        0 2px 8px rgba(35,5,12,.15),
+        inset 0 0 42px rgba(89,42,31,.08);
+      perspective: 800px;
+      transform-style: preserve-3d;
+      transition: transform .8s cubic-bezier(.22,.72,.25,1), filter .8s ease;
+    }
+
+    /* Back diagonal visible inside the opened envelope. */
+    .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+      background: linear-gradient(180deg, transparent 0 47%, rgba(184,154,98,.13) 47.4% 47.8%, transparent 48.2%);
+      border-radius: inherit;
+    }
+
+    .envelope .flap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    /* Front pocket: same ivory/gold V8 styling, but kept as a single flap layer like the reference. */
+    .envelope .flap.front {
+      z-index: 3;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .envelope .flap.front::before,
+    .envelope .flap.front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #f8eddd, #ead8bf);
+      filter: drop-shadow(0 -1px 0 rgba(184,154,98,.18));
+    }
+
+    .envelope .flap.front::before {
+      clip-path: polygon(0 0, 50% 53%, 100% 0, 100% 100%, 0 100%);
+      opacity: .52;
+    }
+
+    .envelope .flap.front::after {
+      clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+      opacity: 1;
+    }
+
+    /* Top flap uses the same transform-origin and 180deg flip as the supplied animation. */
+    .envelope .flap.top {
+      z-index: 3;
+      height: 57%;
+      bottom: auto;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: linear-gradient(165deg, #fff6e9 0%, #ead7bd 100%);
+      filter: drop-shadow(0 1px 0 rgba(184,154,98,.36));
+      transform-origin: 50% 0;
+      -webkit-transform-origin: 50% 0;
+      transform: rotateX(0deg);
+      perspective: 800px;
+      will-change: transform;
+    }
+
+    .envelope.open .flap.top {
+      animation-name: flip;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    /* Letter uses the reference's 8% -> -120% -> 8% top movement. */
+    .envelope .letter {
+      position: absolute;
+      z-index: 1;
+      width: 94%;
+      height: 84%;
+      top: 8%;
+      left: 3%;
+      border: 1px solid rgba(184,154,98,.46);
+      border-radius: 2px;
+      background:
+        linear-gradient(rgba(255,250,241,.985), rgba(255,250,241,.985)),
+        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
+      color: var(--burgundy-800);
+      box-shadow: inset 0 0 26px rgba(89,42,31,.035);
+      transform-style: preserve-3d;
+      will-change: top, transform;
+    }
+
+    .envelope.open .letter {
+      animation-name: remove;
+      animation-duration: 2s;
+      animation-delay: 1.5s;
+      animation-fill-mode: forwards;
+    }
+
+    /* These two paper faces intentionally behave like .letter:before/.letter:after in the reference. */
+    .envelope .letter::before,
+    .envelope .letter::after {
+      content: "";
+      position: absolute;
+      width: calc(100% + 2px);
+      height: 75%;
+      left: -1px;
+      background:
+        linear-gradient(rgba(255,250,241,.99), rgba(246,235,217,.99)),
+        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
+      border: 1px solid rgba(184,154,98,.46);
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      transform-style: preserve-3d;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+    }
+
+    .envelope .letter::before {
+      top: -1px;
+      z-index: 1;
+      animation-delay: 4s;
+      transform-origin: 50% 0;
+      -webkit-transform-origin: 50% 0;
+      transform: rotateX(10deg);
+    }
+
+    .envelope.open .letter::before { animation-name: fold-up; }
+
+    .envelope .letter::after {
+      bottom: -1px;
+      z-index: 1;
+      animation-delay: 5s;
+      transform-origin: 50% 100%;
+      -webkit-transform-origin: 50% 100%;
+      transform: rotateX(-5deg);
+    }
+
+    .envelope.open .letter::after { animation-name: fold-down; }
+
+    .letter-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .letter-monogram {
+      font-family: var(--script);
+      font-size: clamp(48px, 10vw, 72px);
+      line-height: .8;
+      text-shadow: .2px 0 currentColor, -.2px 0 currentColor;
+    }
+
+    .letter-date {
+      font-size: clamp(11px, 2.2vw, 14px);
+      font-weight: 700;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+    }
+
+    .wax-seal {
+      position: absolute;
+      z-index: 9;
+      left: 50%;
+      top: 51%;
+      width: clamp(76px, 15vw, 92px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      color: #ead9b7;
+      transform: translate(-50%, -50%) rotate(-4deg);
+      transition: transform .62s cubic-bezier(.22,.72,.25,1), opacity .55s ease, filter .62s ease;
+      filter: drop-shadow(0 7px 8px rgba(55,6,18,.30));
+    }
+
+    .wax-seal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(50% 0,62% 7%,76% 4%,87% 15%,96% 28%,93% 43%,100% 55%,91% 69%,88% 84%,72% 89%,62% 100%,48% 94%,35% 100%,24% 91%,9% 86%,8% 69%,0 56%,7% 43%,3% 29%,15% 19%,24% 7%,38% 9%);
+      background:
+        radial-gradient(circle at 34% 28%, rgba(255,255,255,.14), transparent 24%),
+        radial-gradient(circle at 60% 64%, #7d2033 0 18%, #651727 56%, #4c0f1d 100%);
+      box-shadow: inset 0 0 0 1px rgba(255,223,185,.16), inset 0 -6px 12px rgba(41,3,12,.22);
+    }
+
+    .wax-seal::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border: 1px solid rgba(234,217,183,.52);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 3px rgba(58,8,18,.16);
+    }
+
+    .wax-seal span {
+      position: relative;
+      z-index: 1;
+      margin-top: -2px;
+      font-family: var(--script);
+      font-size: clamp(23px, 5vw, 31px);
+      line-height: 1;
+      text-shadow: 0 1px 1px rgba(48,9,18,.55);
+    }
+
+    .gate-open-label {
+      margin: clamp(22px, 4vh, 34px) 0 2px;
+      color: var(--ivory);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .gate-open-hint {
+      margin: 0;
+      color: rgba(251,247,238,.72);
+      font-size: 13px;
+      font-weight: 575;
+      letter-spacing: .035em;
+    }
+
+    .invitation-gate:not(.is-opening) .envelope-button:hover .envelope,
+    .invitation-gate:not(.is-opening) .envelope-button:focus-visible .envelope {
+      transform: translateY(-5px) scale(1.008);
+      filter: brightness(1.015);
+    }
+
+    .invitation-gate:not(.is-opening) .envelope-button:hover .wax-seal,
+    .invitation-gate:not(.is-opening) .envelope-button:focus-visible .wax-seal {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.035);
+    }
+
+    .invitation-gate.is-opening .wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(14deg) scale(.70);
+      filter: blur(.35px) drop-shadow(0 3px 5px rgba(55,6,18,.18));
+    }
+
+    .invitation-gate.is-opening .gate-kicker,
+    .invitation-gate.is-opening .gate-open-label,
+    .invitation-gate.is-opening .gate-open-hint {
+      transition: opacity .82s ease, transform .95s cubic-bezier(.16,1,.3,1);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    /* Keyframes are intentionally kept equivalent to the supplied example. */
+    @keyframes flip {
+      100% {
+        transform: rotateX(180deg);
+        z-index: 1;
+      }
+    }
+
+    @keyframes remove {
+      50% {
+        top: -120%;
+      }
+      100% {
+        top: 8%;
+        z-index: 3;
+      }
+    }
+
+    @keyframes fold-up {
+      to { transform: rotateX(140deg); }
+    }
+
+    @keyframes fold-down {
+      to { transform: rotateX(-140deg); }
+    }
+
+    @media (max-width: 620px) {
+      .invitation-gate { padding-inline: 14px; }
+      .invitation-gate::before { inset: 10px; }
+      .invitation-gate::after { inset: 16px; }
+      .gate-content { transform: translateY(-1.5vh); }
+      .envelope-button { width: min(480px, 91vw, calc(66dvh * 1.56)); }
+      .gate-kicker { margin-bottom: 24px; }
+      .gate-open-label { margin-top: 25px; font-size: 12.5px; }
+      .gate-open-hint { width: min(310px, 88vw); line-height: 1.5; }
+    }
+
+    @media (max-height: 620px) and (orientation: landscape) {
+      .gate-content { transform: translateY(0); }
+      .gate-kicker { margin-bottom: 10px; font-size: clamp(36px, 8vh, 52px); }
+      .envelope-button { width: min(420px, 62vw, calc(58dvh * 1.56)); }
+      .gate-open-label { margin-top: 10px; }
+      .gate-open-hint { font-size: 11.5px; }
+    }
+
+
+
+    /* Lebanese Arabic: keep the V10 design, but switch translated copy to natural RTL reading. */
+    html[dir="rtl"] body { font-family: var(--arabic); }
+    html[dir="rtl"] [data-i18n] { font-family: var(--arabic); letter-spacing: 0; }
+    html[dir="rtl"] .language-switcher,
+    html[dir="rtl"] .brand,
+    html[dir="rtl"] .hero-place,
+    html[dir="rtl"] .address,
+    html[dir="rtl"] .hotel-address,
+    html[dir="rtl"] .booking-code,
+    html[dir="rtl"] .travel-card h3,
+    html[dir="rtl"] .footer-contact a,
+    html[dir="rtl"] .closing-rsvp-phone a { direction: ltr; }
+    html[dir="rtl"] .language-switcher { direction: ltr; }
+    html[dir="rtl"] .nav-links a,
+    html[dir="rtl"] .button,
+    html[dir="rtl"] .eyebrow,
+    html[dir="rtl"] .booking-code span,
+    html[dir="rtl"] .closing-rsvp-deadline,
+    html[dir="rtl"] .gate-open-label { letter-spacing: 0; }
+    html[dir="rtl"] .details-list li { padding-left: 0; padding-right: 50px; text-align: right; }
+    html[dir="rtl"] .details-list li::before { left: auto; right: 0; }
+    html[dir="rtl"] .closing-rsvp-phone { direction: rtl; }
 
     .site-header {
       position: sticky;
@@ -807,7 +1246,33 @@
     }
   </style>
 </head>
-<body>
+<body class="has-invitation-gate invitation-locked">
+  <section class="invitation-gate" id="invitationGate" aria-label="Wedding invitation">
+    <div class="gate-content">
+      <p class="gate-kicker">Marek &amp; Theres</p>
+      <button class="envelope-button" id="openInvitationButton" type="button" aria-label="Open invitation">
+        <span class="envelope" id="openingEnvelope" aria-hidden="true">
+          <span class="flap front"></span>
+          <span class="flap top"></span>
+          <span class="letter">
+            <span class="letter-content">
+              <span class="letter-monogram">M&amp;T</span>
+              <span class="letter-date">12 · 12 · 2026</span>
+            </span>
+          </span>
+          <span class="wax-seal"><span>M&amp;T</span></span>
+        </span>
+      </button>
+      <p class="gate-open-label" data-i18n="openInvitation">Open invitation</p>
+      <p class="gate-open-hint" data-i18n="openInvitationHint">Tap or click the wax seal to open</p>
+    </div>
+  </section>
+  <noscript><style>
+    .invitation-gate { display: none !important; }
+    body { overflow: auto !important; }
+    .site-header, main, .footer, .music-toggle { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+  </style></noscript>
+
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="#home" aria-label="Marek and Theres — home">
@@ -828,6 +1293,7 @@
           <button type="button" class="active" data-lang="en" aria-label="English">EN</button>
           <button type="button" data-lang="sv" aria-label="Svenska">SV</button>
           <button type="button" data-lang="cs" aria-label="Čeština">CZ</button>
+          <button type="button" data-lang="lb" aria-label="العربية اللبنانية">LB</button>
         </div>
 
         <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
@@ -994,6 +1460,8 @@
   <script>
     const translations = {
       en: {
+        openInvitation: "Open invitation",
+        openInvitationHint: "Tap or click the wax seal to open",
         navHome: "Invitation",
         navDay: "The day",
         navStay: "Accommodation",
@@ -1047,6 +1515,7 @@
         rsvpButton: "Send your RSVP",
         rsvpButtonShort: "RSVP",
         rsvpNote: "When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.",
+        rsvpPhoneIntro: "Prefer to reply by phone?",
         contactLabel: "Contact / RSVP",
         emailBody: "Hello Marek & Theres,\n\nRSVP: [We will attend / We are unable to attend]\nGuest name(s):\nDietary requirements / notes:\n\nWith love,",
         musicLoading: "Loading Christmas music",
@@ -1056,6 +1525,8 @@
         closingCopy: "Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together."
       },
       sv: {
+        openInvitation: "Öppna inbjudan",
+        openInvitationHint: "Tryck eller klicka på vaxsigillet för att öppna",
         navHome: "Inbjudan",
         navDay: "Dagen",
         navStay: "Boende",
@@ -1109,6 +1580,7 @@
         rsvpButton: "Skicka ert svar",
         rsvpButtonShort: "O.S.A.",
         rsvpNote: "När ni svarar, skriv vilka som kommer och ange eventuella kostönskemål eller andra viktiga upplysningar. E-postmeddelandet går till oss båda.",
+        rsvpPhoneIntro: "Föredrar ni att svara via telefon?",
         contactLabel: "Kontakt / O.S.A.",
         emailBody: "Hej Marek & Theres,\n\nO.S.A.: [Vi kommer / Vi kan tyvärr inte komma]\nNamn på gäster:\nKostönskemål / meddelande:\n\nVarma hälsningar,",
         musicLoading: "Laddar julmusik",
@@ -1118,6 +1590,8 @@
         closingCopy: "Tack för att ni är en del av våra liv. Det betyder oerhört mycket för oss att få ha er med när vi börjar detta nya kapitel tillsammans."
       },
       cs: {
+        openInvitation: "Otevřít pozvánku",
+        openInvitationHint: "Klepněte nebo klikněte na voskovou pečeť",
         navHome: "Pozvání",
         navDay: "Program",
         navStay: "Ubytování",
@@ -1171,6 +1645,7 @@
         rsvpButton: "Odeslat RSVP",
         rsvpButtonShort: "RSVP",
         rsvpNote: "V odpovědi prosím uveďte, kdo se zúčastní, a případná dietní omezení nebo jiné důležité poznámky. E-mail je adresován nám oběma.",
+        rsvpPhoneIntro: "Raději odpovíte telefonicky?",
         contactLabel: "Kontakt / RSVP",
         emailBody: "Ahoj Marku a Theres,\n\nRSVP: [Přijdeme / Bohužel se nemůžeme zúčastnit]\nJména hostů:\nDietní omezení / poznámka:\n\nS pozdravem,",
         musicLoading: "Načítá se vánoční hudba",
@@ -1178,6 +1653,71 @@
         musicPlay: "Přehrát vánoční hudbu",
         closingScript: "S láskou",
         closingCopy: "Děkujeme, že jste součástí našich životů. Moc pro nás znamená, že budete s námi, když společně otevřeme tuto novou kapitolu."
+      },
+      lb: {
+        openInvitation: "افتحوا الدعوة",
+        openInvitationHint: "إكبسوا أو إضغطوا على ختم الشمع لتفتحوا الدعوة",
+        navHome: "الدعوة",
+        navDay: "نهار العرس",
+        navStay: "الإقامة",
+        navTravel: "السفر",
+        navRsvp: "تأكيد الحضور",
+        heroKicker: "عيلة سبانيك وعيلة سعد",
+        heroRequest: "بكل فرح بيدعوكن لتكونوا معنا وتشهدوا وتحتفلوا بزواج",
+        heroDate: "12 كانون الأول 2026",
+        heroCopy: "من كل قلبنا، منكون كتير مبسوطين وممتنّين إذا شاركتونا هالنهار الشتوي، بين الناس اللي منحبّن أكتر شي.",
+        viewDay: "شوفوا برنامج النهار",
+        addCalendar: "ضيفوا على الروزنامة",
+        dayScript: "نهار عرسنا",
+        dayTitle: "مكانين، وفرحة وحدة",
+        dayIntro: "منكون كتير فرحانين وممتنّين إذا احتفلتوا معنا. المراسم بتبلّش بترولهيتان، وبعدها عشا، مشروبات ورقص بـ Folkets Park.",
+        churchTitle: "مراسم الزواج",
+        eveningTitle: "سهرة العرس",
+        openMap: "افتحوا الخريطة ↗",
+        stayScript: "خليكن قريب",
+        stayTitle: "الإقامة بترولهيتان",
+        stayIntro: "أمّنّا سعر خاص ومسبق للعرس بفندق Scandic Swania. الغرف حسب التوفّر، فالأفضل تحجزوا بكّير.",
+        recommendedHotel: "الفندق المقترح",
+        bookingCode: "رمز الحجز",
+        bookingDeadline: "آخر مهلة للحجز",
+        deadlineDate: "26 تشرين الثاني 2027",
+        bookScandic: "احجزوا بـ Scandic ↗",
+        bookingStepsTitle: "كيف تحجزوا غرفتكن بـ Scandic",
+        stayRule1: "احجزوا عبر scandichotels.com أو اتصلوا بمكتب الحجوزات المركزي على +46 8 517 517 00 وبعدين إكبسوا 1.",
+        stayRule2: "وقت الحجز، أعطوا الرمز BMAR101226 لتحصلوا على سعر العرس المحجوز مسبقاً.",
+        stayRule3: "الغرف بتكون حسب التوفّر.",
+        stayRule4: "الدفع بيكون وقت تسجيل الدخول بالبطاقة الائتمانية.",
+        stayRule5: "لازم تعطوا معلومات البطاقة الائتمانية وقت الحجز لضمان الغرفة.",
+        stayRule6: "كل حجز بينعمل بشكل فردي وبينحسب كحجز فردي.",
+        stayRule7: "فيكن تعدّلوا أو تلغوا الحجز لحد الساعة 18:00 بنهار الوصول.",
+        stayRule8: "إذا صار تعديل أو إلغاء بعد الساعة 18:00، للفندق الحق يطلب قيمة الحجز.",
+        stayRule9: "كل ضيف بيستلم تأكيد خاص فيه وقت الحجز.",
+        otherHotelsTitle: "بتفضّلوا فندق تاني؟",
+        otherHotelsCopy: "شوفوا خيارات إقامة تانية بترولهيتان لليلة العرس.",
+        browseHotels: "شوفوا الفنادق ↗",
+        travelScript: "كيف توصلوا",
+        travelTitle: "السفر من جمهورية التشيك",
+        travelIntro: "للضيوف الجايين من جمهورية التشيك، خيار مريح هو الطيران من كراكوف لمطار Göteborg Landvetter وبعدين المتابعة لترولهيتان.",
+        recommendedRoute: "المسار المقترح",
+        travelCopy: "Ryanair بتسيّر رحلات بين كراكوف وغوتنبرغ. رجاءً تأكدوا مباشرة من شركة الطيران من مواعيد وأوقات الرحلات اللي بتناسب إقامتكن.",
+        checkFlights: "شوفوا رحلات Ryanair ↗",
+        travelNote: "مواعيد الرحلات ممكن تتغيّر، فتأكّدوا من خطتكن قبل ما تعملوا أي حجز غير قابل للاسترداد.",
+        rsvpScript: "منترجّى تأكيد الحضور",
+        rsvpTitle: "رح تحتفلوا معنا؟",
+        rsvpCopy: "كرمال نقدر نكمّل الترتيبات الأخيرة، خبرونا إذا رح تقدروا تكونوا معنا.",
+        rsvpDeadlineLabel: "منترجّى تأكيد الحضور قبل",
+        rsvpDeadlineDate: "31 تشرين الأول 2026",
+        rsvpButton: "ابعثوا تأكيد الحضور",
+        rsvpButtonShort: "تأكيد الحضور",
+        rsvpNote: "وقت تردّوا، خبرونا مين رح يحضر وإذا في أي متطلبات غذائية أو ملاحظات مهمّة. الإيميل بيروح لإلنا التنين.",
+        rsvpPhoneIntro: "بتفضّلوا تردّوا عالتليفون؟",
+        contactLabel: "تواصل / تأكيد الحضور",
+        emailBody: "مرحبا مارك وتيريز،\n\nتأكيد الحضور: [رح نحضر / للأسف ما رح نقدر نحضر]\nأسماء الضيوف:\nمتطلبات غذائية / ملاحظات:\n\nمع المحبة،",
+        musicLoading: "عم تتحمّل موسيقى الميلاد",
+        musicMute: "سكّروا صوت موسيقى الميلاد",
+        musicPlay: "شغّلوا موسيقى الميلاد",
+        closingScript: "مع المحبة",
+        closingCopy: "شكراً لأنكن جزء من حياتنا. وجودكن معنا بهالنهار بيعني إلنا كتير وإحنا عم نبلّش هالفصل الجديد سوا."
       }
     };
 
@@ -1185,6 +1725,9 @@
     const translatableElements = document.querySelectorAll('[data-i18n]');
     const rsvpEmailLinks = document.querySelectorAll('[data-rsvp-email]');
     const musicToggle = document.getElementById('musicToggle');
+    const invitationGate = document.getElementById('invitationGate');
+    const openInvitationButton = document.getElementById('openInvitationButton');
+    const openingEnvelope = document.getElementById('openingEnvelope');
     let currentLanguage = 'en';
 
     function updateRsvpEmailLinks(dictionary) {
@@ -1208,7 +1751,8 @@
     function setLanguage(lang) {
       const dictionary = translations[lang] || translations.en;
       currentLanguage = translations[lang] ? lang : 'en';
-      document.documentElement.lang = currentLanguage;
+      document.documentElement.lang = currentLanguage === 'lb' ? 'ar-LB' : currentLanguage;
+      document.documentElement.dir = currentLanguage === 'lb' ? 'rtl' : 'ltr';
       translatableElements.forEach((element) => {
         const key = element.dataset.i18n;
         if (dictionary[key]) element.textContent = dictionary[key];
@@ -1220,6 +1764,7 @@
       });
       updateRsvpEmailLinks(dictionary);
       updateMusicAccessibility(dictionary);
+      if (openInvitationButton) openInvitationButton.setAttribute('aria-label', dictionary.openInvitation || translations.en.openInvitation);
       try { localStorage.setItem('wedding-language', currentLanguage); } catch (error) { /* file:// privacy mode fallback */ }
     }
 
@@ -1230,7 +1775,7 @@
     let savedLanguage = null;
     try { savedLanguage = localStorage.getItem('wedding-language'); } catch (error) { /* file:// privacy mode fallback */ }
     const browserLanguage = navigator.language?.toLowerCase() || 'en';
-    const initialLanguage = savedLanguage || (browserLanguage.startsWith('sv') ? 'sv' : browserLanguage.startsWith('cs') ? 'cs' : 'en');
+    const initialLanguage = savedLanguage || (browserLanguage.startsWith('ar') ? 'lb' : browserLanguage.startsWith('sv') ? 'sv' : browserLanguage.startsWith('cs') ? 'cs' : 'en');
     setLanguage(initialLanguage);
 
     const menuButton = document.getElementById('menuButton');
@@ -1313,13 +1858,19 @@
     document.getElementById('calendarButton').addEventListener('click', downloadCalendar);
     document.getElementById('calendarButtonBottom').addEventListener('click', downloadCalendar);
 
-    // Christmas jazz ambience. Start playback muted so autoplay is browser-friendly.
-    // Guests can turn the music on or off using the floating music button.
+    // Christmas jazz ambience. The player preloads and runs muted behind the sealed envelope.
+    // Opening the invitation is the user gesture that unmutes the music and fades it gently
+    // to a deliberately low background level.
     let musicPlayer = null;
     let musicReady = false;
     let musicUserMuted = true;
+    let musicFadeFrame = null;
+    let pendingEnvelopeMusicStart = false;
+    let invitationOpened = false;
     const christmasVideoId = 'fj0WVcj93to';
     const christmasStartSeconds = 936; // Instrumental jazz section in the selected no-copyright mix.
+    const defaultMusicVolume = 14; // Low ambient level for the envelope experience (YouTube scale: 0-100).
+    const envelopeFadeDuration = 5600;
 
     function setMusicButtonState({ loading = false, muted = false, paused = false } = {}) {
       musicToggle.classList.toggle('is-loading', loading);
@@ -1328,22 +1879,98 @@
       updateMusicAccessibility(translations[currentLanguage] || translations.en);
     }
 
-    function startMusicAudible() {
+    function cancelMusicFade() {
+      if (musicFadeFrame) cancelAnimationFrame(musicFadeFrame);
+      musicFadeFrame = null;
+    }
+
+    function fadeMusicTo(targetVolume = defaultMusicVolume, duration = envelopeFadeDuration) {
+      if (!musicReady || !musicPlayer) return;
+      cancelMusicFade();
+      const target = Math.max(0, Math.min(100, targetVolume));
+      const startedAt = performance.now();
+
+      function step(now) {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        // Smoothstep keeps the fade especially gentle at the beginning and end.
+        const eased = progress * progress * (3 - 2 * progress);
+        musicPlayer.setVolume(Math.round(target * eased));
+        if (progress < 1 && !musicUserMuted) {
+          musicFadeFrame = requestAnimationFrame(step);
+        } else {
+          musicFadeFrame = null;
+        }
+      }
+
+      musicFadeFrame = requestAnimationFrame(step);
+    }
+
+    function startMusicAudible({ fade = false } = {}) {
       if (!musicReady || !musicPlayer) return false;
+      cancelMusicFade();
       musicUserMuted = false;
-      musicPlayer.setVolume(22);
+      musicPlayer.setVolume(fade ? 0 : defaultMusicVolume);
       musicPlayer.unMute();
       musicPlayer.playVideo();
       setMusicButtonState({ muted: false, paused: false });
+      if (fade) fadeMusicTo(defaultMusicVolume, envelopeFadeDuration);
       return true;
     }
 
     function startMusicMuted() {
       if (!musicReady || !musicPlayer) return;
+      cancelMusicFade();
       musicUserMuted = true;
       musicPlayer.mute();
+      musicPlayer.setVolume(defaultMusicVolume);
       musicPlayer.playVideo();
       setMusicButtonState({ muted: true, paused: false });
+    }
+
+    function startMusicFromEnvelope() {
+      if (!musicReady || !musicPlayer) {
+        pendingEnvelopeMusicStart = true;
+        return false;
+      }
+      pendingEnvelopeMusicStart = false;
+      return startMusicAudible({ fade: true });
+    }
+
+    function openInvitation() {
+      if (invitationOpened || !invitationGate) return;
+      invitationOpened = true;
+      if (openInvitationButton) openInvitationButton.disabled = true;
+
+      // The opening click/tap is also the media-unlock gesture.
+      startMusicFromEnvelope();
+      invitationGate.classList.add('is-opening');
+      if (openingEnvelope) openingEnvelope.classList.add('open');
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Exact reference timing:
+      // 0-1s flap flip; 1.5-3.5s letter rises and returns;
+      // 4-5s upper fold; 5-6s lower fold. Only then reveal the page.
+      const revealDelay = reducedMotion ? 80 : 6150;
+      const removeDelay = reducedMotion ? 180 : 8450;
+
+      window.setTimeout(() => {
+        document.body.classList.remove('invitation-locked');
+        invitationGate.classList.add('is-revealing');
+      }, revealDelay);
+
+      window.setTimeout(() => {
+        invitationGate.hidden = true;
+        invitationGate.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('has-invitation-gate');
+      }, removeDelay);
+    }
+
+    if (openInvitationButton) {
+      // Pointerdown gives the media unlock the earliest possible user gesture on touch devices.
+      openInvitationButton.addEventListener('pointerdown', () => {
+        if (!invitationOpened && musicReady) startMusicFromEnvelope();
+      }, { passive: true });
+      openInvitationButton.addEventListener('click', openInvitation);
     }
 
     musicToggle.addEventListener('click', () => {
@@ -1375,10 +2002,14 @@
           onReady(event) {
             musicReady = true;
             musicUserMuted = true;
-            event.target.setVolume(22);
+            event.target.setVolume(defaultMusicVolume);
             event.target.mute();
             event.target.playVideo();
             setMusicButtonState({ loading: false, muted: true, paused: false });
+
+            // If the envelope was opened unusually quickly before the API finished loading,
+            // make a best-effort start. Normal clicks happen after the muted player is ready.
+            if (pendingEnvelopeMusicStart && invitationOpened) startMusicFromEnvelope();
           },
           onStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
@@ -1390,7 +2021,7 @@
             }
           },
           onError() {
-            setMusicButtonState({ muted: false, paused: true });
+            setMusicButtonState({ muted: true, paused: true });
           }
         }
       });
