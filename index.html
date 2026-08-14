@@ -31,7 +31,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 18px); }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 18px); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
       margin: 0;
       min-width: 320px;
@@ -41,13 +41,27 @@
         radial-gradient(circle at 84% 76%, rgba(213,194,151,.08) 0 1px, transparent 1.7px) 0 0 / 34px 34px,
         var(--burgundy-900);
       font-family: var(--serif);
+      font-weight: 500;
+      font-optical-sizing: none;
+      font-variation-settings: "opsz" 14;
       line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: auto;
     }
 
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
     section { position: relative; }
+
+    /* Bodoni is intentionally high-contrast. A lower optical size and slightly
+       stronger text weights keep its hairlines crisp and readable on large screens. */
+    h1, h2, h3, h4, p, li, a, button, summary, strong, span {
+      font-optical-sizing: none;
+    }
+    .couple-name, .section-heading .script, .rsvp-card .script, .closing .script, .brand-mark {
+      font-variation-settings: normal;
+      font-optical-sizing: auto;
+    }
 
     .site-header {
       position: sticky;
@@ -96,9 +110,9 @@
 
     .brand-text {
       margin-left: 2px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .17em;
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
@@ -108,9 +122,9 @@
       position: relative;
       color: rgba(251, 247, 238, .92);
       text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .13em;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: .12em;
       text-transform: uppercase;
       transition: color .25s ease;
     }
@@ -138,9 +152,9 @@
       border: 0;
       border-radius: 999px;
       padding: 7px 9px 6px;
-      color: rgba(251, 247, 238, .72);
+      color: rgba(251, 247, 238, .86);
       background: transparent;
-      font: 600 10px/1 var(--serif);
+      font: 650 11.5px/1 var(--serif);
       letter-spacing: .08em;
       cursor: pointer;
     }
@@ -192,9 +206,9 @@
     .hero-kicker,
     .eyebrow {
       margin: 0 0 20px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .23em;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .21em;
       text-transform: uppercase;
       color: var(--burgundy-700);
     }
@@ -226,7 +240,7 @@
       width: min(560px, 100%);
       margin: 4px auto 28px;
       color: #5a3038;
-      font-size: clamp(14px, 1.8vw, 17px);
+      font-size: clamp(16px, 1.8vw, 18px);
       font-weight: 600;
       line-height: 1.65;
       letter-spacing: .035em;
@@ -242,9 +256,9 @@
     .hero-place {
       margin: 8px 0 0;
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .22em;
+      font-size: 13.5px;
+      font-weight: 650;
+      letter-spacing: .20em;
       text-transform: uppercase;
     }
 
@@ -252,7 +266,7 @@
       width: min(550px, 100%);
       margin: 34px auto 0;
       font-size: clamp(17px, 2.1vw, 20px);
-      font-weight: 500;
+      font-weight: 550;
       font-style: italic;
       color: #4d2830;
     }
@@ -277,7 +291,7 @@
       background: var(--burgundy-700);
       color: var(--ivory);
       text-decoration: none;
-      font: 600 11px/1.2 var(--serif);
+      font: 650 12.5px/1.2 var(--serif);
       letter-spacing: .14em;
       text-transform: uppercase;
       cursor: pointer;
@@ -314,16 +328,17 @@
     .section-heading h2 {
       margin: 0;
       font-size: clamp(31px, 5vw, 50px);
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.08;
+      letter-spacing: -.012em;
     }
     .section-heading p {
       margin: 18px auto 0;
       max-width: 640px;
       color: var(--muted);
       color: #63484d;
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 17px;
+      font-weight: 575;
     }
     .section-burgundy .section-heading p { color: rgba(251,247,238,.88); }
 
@@ -355,33 +370,34 @@
     .event-number {
       margin-bottom: 26px;
       color: var(--gold);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .2em;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .18em;
     }
     .event-time {
       margin: 0 0 4px;
       color: var(--burgundy-700);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .18em;
+      font-size: 14.5px;
+      font-weight: 650;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
     .event-card h3 {
       margin: 0 0 14px;
       font-size: clamp(25px, 3.4vw, 36px);
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.15;
+      letter-spacing: -.012em;
     }
-    .address { margin: 0 0 26px; color: #63484d; font-size: 15px; font-weight: 500; }
+    .address { margin: 0 0 26px; color: #63484d; font-size: 16px; font-weight: 575; }
     .text-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       color: var(--burgundy-700);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .14em;
+      font-size: 12.5px;
+      font-weight: 650;
+      letter-spacing: .12em;
       text-decoration: none;
       text-transform: uppercase;
       border-bottom: 1px solid rgba(107,24,40,.28);
@@ -404,9 +420,9 @@
       margin: 0;
       color: var(--gold-soft);
       font-size: 32px;
-      font-weight: 500;
+      font-weight: 600;
     }
-    .stay-highlight .hotel-address { color: rgba(251,247,238,.65); font-size: 14px; }
+    .stay-highlight .hotel-address { color: rgba(251,247,238,.80); font-size: 15.5px; font-weight: 550; }
     .booking-code {
       margin: 30px 0 20px;
       padding: 18px;
@@ -415,8 +431,9 @@
     }
     .booking-code span {
       display: block;
-      color: rgba(251,247,238,.62);
-      font-size: 10px;
+      color: rgba(251,247,238,.80);
+      font-size: 11.5px;
+      font-weight: 650;
       letter-spacing: .18em;
       text-transform: uppercase;
     }
@@ -430,7 +447,8 @@
     .deadline {
       margin-top: 18px;
       color: var(--gold-soft);
-      font-size: 13px;
+      font-size: 14.5px;
+      font-weight: 600;
       text-align: center;
     }
     .stay-highlight .button {
@@ -438,6 +456,64 @@
       border-color: var(--ivory);
       background: var(--ivory);
       color: var(--burgundy-800);
+    }
+
+
+    .booking-accordion {
+      border-top: 1px solid rgba(213,194,151,.42);
+      border-bottom: 1px solid rgba(213,194,151,.42);
+      background: rgba(255,255,255,.018);
+    }
+    .booking-accordion summary {
+      min-height: 72px;
+      padding: 20px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      color: var(--ivory);
+      cursor: pointer;
+      list-style: none;
+      font-size: 17px;
+      font-weight: 650;
+      line-height: 1.45;
+      letter-spacing: .015em;
+      user-select: none;
+    }
+    .booking-accordion summary::-webkit-details-marker { display: none; }
+    .booking-accordion summary::marker { content: ""; }
+    .booking-accordion summary:hover,
+    .booking-accordion summary:focus-visible { color: var(--gold-soft); outline: none; }
+    .accordion-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      border: 1px solid rgba(213,194,151,.58);
+      border-radius: 50%;
+    }
+    .accordion-icon::before,
+    .accordion-icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 11px;
+      height: 1px;
+      background: var(--gold-soft);
+      transform: translate(-50%, -50%);
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .accordion-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .booking-accordion[open] .accordion-icon::after { transform: translate(-50%, -50%) rotate(0deg); opacity: 0; }
+    .accordion-content {
+      padding: 0 2px 8px;
+      animation: accordionReveal .28s ease both;
+    }
+    .booking-accordion .details-list li:first-child { border-top: 1px solid rgba(213,194,151,.16); }
+    @keyframes accordionReveal {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: none; }
     }
 
     .details-list {
@@ -451,8 +527,9 @@
       padding: 19px 0 19px 50px;
       border-bottom: 1px solid rgba(213,194,151,.20);
       color: rgba(251,247,238,.92);
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
+      font-weight: 575;
+      line-height: 1.6;
     }
     .details-list li::before {
       counter-increment: detail;
@@ -461,7 +538,8 @@
       left: 0;
       top: 18px;
       color: var(--gold-soft);
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 650;
       letter-spacing: .08em;
     }
 
@@ -470,8 +548,8 @@
       padding-top: 30px;
       border-top: 1px solid rgba(213,194,151,.34);
     }
-    .other-hotels h4 { margin: 0 0 10px; font-size: 20px; font-weight: 500; }
-    .other-hotels p { margin: 0 0 18px; color: rgba(251,247,238,.86); font-size: 15px; font-weight: 500; }
+    .other-hotels h4 { margin: 0 0 10px; font-size: 20px; font-weight: 600; }
+    .other-hotels p { margin: 0 0 18px; color: rgba(251,247,238,.92); font-size: 16px; font-weight: 575; }
     .section-burgundy .text-link { color: var(--gold-soft); border-color: rgba(213,194,151,.34); }
 
     .travel-card {
@@ -495,77 +573,11 @@
       color: var(--burgundy-700);
       font-size: 27px;
     }
-    .travel-card h3 { margin: 0 0 9px; font-size: 28px; font-weight: 500; }
-    .travel-card p { margin: 0 0 18px; color: #63484d; font-size: 15px; font-weight: 500; }
-    .travel-note { font-size: 13px; font-weight: 500; font-style: italic; }
+    .travel-card h3 { margin: 0 0 9px; font-size: 28px; font-weight: 600; letter-spacing: -.01em; }
+    .travel-card p { margin: 0 0 18px; color: #63484d; font-size: 16px; font-weight: 575; }
+    .travel-note { font-size: 14px; font-weight: 575; font-style: italic; }
 
-    .rsvp-card {
-      position: relative;
-      width: min(790px, 100%);
-      margin: 0 auto;
-      padding: clamp(38px, 7vw, 66px) clamp(24px, 7vw, 68px);
-      text-align: center;
-      border: 1px solid var(--border);
-      background:
-        linear-gradient(rgba(255,250,241,.96), rgba(255,250,241,.96)),
-        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
-      box-shadow: 0 18px 50px rgba(67,13,25,.08);
-    }
-    .rsvp-card::before {
-      content: "";
-      position: absolute;
-      inset: 11px;
-      pointer-events: none;
-      border: 1px solid rgba(184,154,98,.35);
-    }
-    .rsvp-card .script {
-      display: block;
-      margin-bottom: 2px;
-      color: var(--burgundy-700);
-      font-family: var(--script);
-      font-size: clamp(54px, 9vw, 82px);
-      line-height: .9;
-      text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
-    }
-    .rsvp-card h2 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 48px);
-      font-weight: 600;
-      line-height: 1.08;
-    }
-    .rsvp-copy {
-      width: min(590px, 100%);
-      margin: 20px auto 0;
-      color: #63484d;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    .rsvp-deadline {
-      margin: 30px 0 26px;
-      color: var(--burgundy-700);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .rsvp-deadline strong {
-      display: block;
-      margin-top: 8px;
-      color: var(--ink);
-      font-size: clamp(23px, 3vw, 31px);
-      font-weight: 600;
-      letter-spacing: .04em;
-      text-transform: none;
-    }
-    .rsvp-note {
-      width: min(590px, 100%);
-      margin: 18px auto 0;
-      color: #755d61;
-      font-size: 13px;
-      font-weight: 500;
-      font-style: italic;
-    }
-
+    /* Compact RSVP details are integrated into the final “With love” section. */
     .closing .button.button-outline { color: var(--ivory); border-color: rgba(251,247,238,.82); }
     .closing .button.button-outline:hover { color: var(--burgundy-800); background: var(--ivory); }
 
@@ -576,11 +588,54 @@
       gap: 12px;
     }
 
+    .closing-rsvp {
+      width: min(700px, 100%);
+      margin: 32px auto 28px;
+      padding: 25px 18px 23px;
+      border-top: 1px solid rgba(213,194,151,.48);
+      border-bottom: 1px solid rgba(213,194,151,.48);
+    }
+    .closing-rsvp-copy {
+      width: min(630px, 100%);
+      margin: 0 auto;
+      color: rgba(251,247,238,.94);
+      font-size: 17px;
+      font-weight: 575;
+      line-height: 1.65;
+    }
+    .closing-rsvp-deadline {
+      margin: 17px auto 13px !important;
+      color: var(--gold-soft) !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: .12em;
+      line-height: 1.4 !important;
+      text-transform: uppercase;
+    }
+    .closing-rsvp-deadline strong {
+      display: inline-block;
+      margin-left: 9px;
+      color: var(--ivory);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .025em;
+      text-transform: none;
+    }
+    .closing-rsvp-note {
+      width: min(620px, 100%);
+      margin: 0 auto !important;
+      color: rgba(251,247,238,.82) !important;
+      font-size: 14.5px !important;
+      font-weight: 550 !important;
+      line-height: 1.6 !important;
+      font-style: italic;
+    }
+
     .footer-contact {
       margin-top: 10px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .06em;
+      font-size: 12.5px;
+      font-weight: 650;
+      letter-spacing: .05em;
       text-transform: none;
     }
     .footer-contact a {
@@ -643,6 +698,7 @@
       transition: opacity .2s ease;
     }
     .music-toggle.is-muted .music-slash { opacity: 1; }
+    .music-toggle.is-paused .music-icon { opacity: .72; }
     .music-toggle.is-loading { animation: musicPulse 1.8s ease-in-out infinite; }
     .music-toggle::before {
       content: attr(data-tooltip);
@@ -655,7 +711,7 @@
       border-radius: 999px;
       background: rgba(48,9,18,.94);
       color: var(--ivory);
-      font: 600 10px/1.2 var(--serif);
+      font: 650 11px/1.25 var(--serif);
       letter-spacing: .06em;
       opacity: 0;
       pointer-events: none;
@@ -674,7 +730,7 @@
     }
 
     .closing {
-      padding: clamp(90px, 12vw, 150px) 18px;
+      padding: clamp(82px, 10vw, 128px) 18px;
       text-align: center;
       color: var(--ivory);
       background:
@@ -689,15 +745,15 @@
       line-height: .92;
       text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
     }
-    .closing h2 { margin: 6px 0 22px; font-size: clamp(29px, 5vw, 48px); font-weight: 500; }
-    .closing p { width: min(620px, 100%); margin: 0 auto 30px; color: rgba(251,247,238,.90); font-size: 16px; font-weight: 500; }
+    .closing h2 { margin: 6px 0 20px; font-size: clamp(29px, 5vw, 48px); font-weight: 600; letter-spacing: -.01em; }
+    .closing-copy { width: min(650px, 100%); margin: 0 auto; color: rgba(251,247,238,.94); font-size: 17px; font-weight: 575; line-height: 1.65; }
 
     .footer {
       padding: 28px 18px;
-      color: rgba(251,247,238,.58);
+      color: rgba(251,247,238,.74);
       background: var(--burgundy-950);
       text-align: center;
-      font-size: 10px;
+      font-size: 11.5px;
       letter-spacing: .18em;
       text-transform: uppercase;
     }
@@ -722,7 +778,7 @@
         border-bottom: 1px solid rgba(213,194,151,.32);
       }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 11px; }
+      .nav-links a { font-size: 12px; }
       .timeline { grid-template-columns: 1fr; }
       .timeline::before { display: none; }
       .event-card:nth-child(2) { margin-top: 0; }
@@ -836,7 +892,7 @@
 
         <div class="stay-grid">
           <aside class="stay-highlight reveal">
-            <p class="eyebrow" data-i18n="recommendedHotel">Recommended hotel</p>
+            <p class="eyebrow" data-i18n="recommendedHotel" style="color:#d5c297;">Recommended hotel</p>
             <h3>Scandic Swania</h3>
             <p class="hotel-address">Storgatan 47–49<br>461 30 Trollhättan</p>
 
@@ -852,17 +908,25 @@
           </aside>
 
           <div class="reveal">
-            <ol class="details-list">
-              <li data-i18n="stayRule1">Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.</li>
-              <li data-i18n="stayRule2">When booking, give the code BMAR101226 to access the pre-booked wedding rate.</li>
-              <li data-i18n="stayRule3">Rooms are booked subject to availability.</li>
-              <li data-i18n="stayRule4">Payment is made at check-in by credit card.</li>
-              <li data-i18n="stayRule5">Credit card information is required at the time of booking to guarantee the room.</li>
-              <li data-i18n="stayRule6">Bookings are made individually and are treated as individual reservations.</li>
-              <li data-i18n="stayRule7">A reservation can be changed or cancelled until 18:00 on the day of arrival.</li>
-              <li data-i18n="stayRule8">For changes or cancellations after 18:00, the hotel has the right to charge for the booking.</li>
-              <li data-i18n="stayRule9">Each guest receives an individual confirmation when the reservation is made.</li>
-            </ol>
+            <details class="booking-accordion">
+              <summary>
+                <span data-i18n="bookingStepsTitle">How to book your room at Scandic</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="accordion-content">
+                <ol class="details-list">
+                  <li data-i18n="stayRule1">Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.</li>
+                  <li data-i18n="stayRule2">When booking, give the code BMAR101226 to access the pre-booked wedding rate.</li>
+                  <li data-i18n="stayRule3">Rooms are booked subject to availability.</li>
+                  <li data-i18n="stayRule4">Payment is made at check-in by credit card.</li>
+                  <li data-i18n="stayRule5">Credit card information is required at the time of booking to guarantee the room.</li>
+                  <li data-i18n="stayRule6">Bookings are made individually and are treated as individual reservations.</li>
+                  <li data-i18n="stayRule7">A reservation can be changed or cancelled until 18:00 on the day of arrival.</li>
+                  <li data-i18n="stayRule8">For changes or cancellations after 18:00, the hotel has the right to charge for the booking.</li>
+                  <li data-i18n="stayRule9">Each guest receives an individual confirmation when the reservation is made.</li>
+                </ol>
+              </div>
+            </details>
 
             <div class="other-hotels">
               <h4 data-i18n="otherHotelsTitle">Prefer another hotel?</h4>
@@ -895,26 +959,20 @@
       </div>
     </section>
 
-    <section class="section-light" id="rsvp">
-      <div class="section-inner">
-        <article class="rsvp-card reveal">
-          <span class="script" data-i18n="rsvpScript">Kindly reply</span>
-          <h2 data-i18n="rsvpTitle">Will you celebrate with us?</h2>
-          <p class="rsvp-copy" data-i18n="rsvpCopy">To help us with the final arrangements, please let us know whether you will be able to join us.</p>
-          <p class="rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Please RSVP by</span><strong data-i18n="rsvpDeadlineDate">31 October 2026</strong></p>
-          <a class="button" id="rsvpEmailButton" data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com" data-i18n="rsvpButton">Send your RSVP</a>
-          <p class="rsvp-note" data-i18n="rsvpNote">The email opens to both of us. Please tell us who is attending and include any dietary requirements or helpful notes.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="closing">
+    <section class="closing" id="rsvp">
       <div class="reveal">
         <span class="script" data-i18n="closingScript">With love</span>
         <h2>Marek &amp; Theres</h2>
-        <p data-i18n="closingCopy">Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together.</p>
+        <p class="closing-copy" data-i18n="closingCopy">Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together.</p>
+
+        <div class="closing-rsvp">
+          <p class="closing-rsvp-copy" data-i18n="rsvpCopy">To help us with the final arrangements, please let us know whether you will be able to join us.</p>
+          <p class="closing-rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Please RSVP by</span><strong data-i18n="rsvpDeadlineDate">31 October 2026</strong></p>
+          <p class="closing-rsvp-note" data-i18n="rsvpNote">When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.</p>
+        </div>
+
         <div class="closing-actions">
-          <a class="button" href="#rsvp" data-i18n="rsvpButtonShort">RSVP</a>
+          <a class="button" id="rsvpEmailButton" data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com" data-i18n="rsvpButton">Send your RSVP</a>
           <button class="button button-outline" type="button" id="calendarButtonBottom" data-i18n="addCalendar">Add to calendar</button>
         </div>
       </div>
@@ -960,6 +1018,7 @@
         bookingDeadline: "Last day for booking",
         deadlineDate: "26 November 2027",
         bookScandic: "Book at Scandic ↗",
+        bookingStepsTitle: "How to book your room at Scandic",
         stayRule1: "Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.",
         stayRule2: "When booking, give the code BMAR101226 to access the pre-booked wedding rate.",
         stayRule3: "Rooms are booked subject to availability.",
@@ -986,7 +1045,7 @@
         rsvpDeadlineDate: "31 October 2026",
         rsvpButton: "Send your RSVP",
         rsvpButtonShort: "RSVP",
-        rsvpNote: "The email opens to both of us. Please tell us who is attending and include any dietary requirements or helpful notes.",
+        rsvpNote: "When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.",
         contactLabel: "Contact / RSVP",
         emailBody: "Hello Marek & Theres,\n\nRSVP: [We will attend / We are unable to attend]\nGuest name(s):\nDietary requirements / notes:\n\nWith love,",
         musicLoading: "Loading Christmas music",
@@ -1021,6 +1080,7 @@
         bookingDeadline: "Sista bokningsdag",
         deadlineDate: "26 november 2027",
         bookScandic: "Boka på Scandic ↗",
+        bookingStepsTitle: "Så bokar ni ert rum på Scandic",
         stayRule1: "Boka via scandichotels.com eller ring Scandics centrala bokning på +46 8 517 517 00 och tryck 1.",
         stayRule2: "Ange bokningskod BMAR101226 för att få det förbokade bröllopspriset.",
         stayRule3: "Rummen bokas i mån av tillgänglighet.",
@@ -1047,7 +1107,7 @@
         rsvpDeadlineDate: "31 oktober 2026",
         rsvpButton: "Skicka ert svar",
         rsvpButtonShort: "O.S.A.",
-        rsvpNote: "E-postmeddelandet går till oss båda. Skriv gärna vilka som kommer och ange eventuella kostönskemål eller andra viktiga upplysningar.",
+        rsvpNote: "När ni svarar, skriv vilka som kommer och ange eventuella kostönskemål eller andra viktiga upplysningar. E-postmeddelandet går till oss båda.",
         contactLabel: "Kontakt / O.S.A.",
         emailBody: "Hej Marek & Theres,\n\nO.S.A.: [Vi kommer / Vi kan tyvärr inte komma]\nNamn på gäster:\nKostönskemål / meddelande:\n\nVarma hälsningar,",
         musicLoading: "Laddar julmusik",
@@ -1082,6 +1142,7 @@
         bookingDeadline: "Poslední den pro rezervaci",
         deadlineDate: "26. listopadu 2027",
         bookScandic: "Rezervovat ve Scandicu ↗",
+        bookingStepsTitle: "Jak si rezervovat pokoj ve Scandicu",
         stayRule1: "Rezervaci proveďte přes scandichotels.com nebo telefonicky přes centrální rezervační kancelář na +46 8 517 517 00 a poté stiskněte 1.",
         stayRule2: "Při rezervaci uveďte kód BMAR101226 pro využití předem rezervované svatební ceny.",
         stayRule3: "Pokoje jsou rezervovány podle aktuální dostupnosti.",
@@ -1108,7 +1169,7 @@
         rsvpDeadlineDate: "31. října 2026",
         rsvpButton: "Odeslat RSVP",
         rsvpButtonShort: "RSVP",
-        rsvpNote: "E-mail se odešle nám oběma. Uveďte prosím jména hostů a případná dietní omezení nebo jiné důležité poznámky.",
+        rsvpNote: "V odpovědi prosím uveďte, kdo se zúčastní, a případná dietní omezení nebo jiné důležité poznámky. E-mail je adresován nám oběma.",
         contactLabel: "Kontakt / RSVP",
         emailBody: "Ahoj Marku a Theres,\n\nRSVP: [Přijdeme / Bohužel se nemůžeme zúčastnit]\nJména hostů:\nDietní omezení / poznámka:\n\nS pozdravem,",
         musicLoading: "Načítá se vánoční hudba",
@@ -1136,10 +1197,11 @@
       if (!musicToggle) return;
       const isLoading = musicToggle.classList.contains('is-loading');
       const isMuted = musicToggle.classList.contains('is-muted');
-      const label = isLoading ? dictionary.musicLoading : (isMuted ? dictionary.musicPlay : dictionary.musicMute);
+      const isPaused = musicToggle.classList.contains('is-paused');
+      const label = isLoading ? dictionary.musicLoading : ((isMuted || isPaused) ? dictionary.musicPlay : dictionary.musicMute);
       musicToggle.setAttribute('aria-label', label);
       musicToggle.dataset.tooltip = label;
-      musicToggle.setAttribute('aria-pressed', String(!isMuted && !isLoading));
+      musicToggle.setAttribute('aria-pressed', String(!isMuted && !isPaused && !isLoading));
     }
 
     function setLanguage(lang) {
@@ -1250,44 +1312,69 @@
     document.getElementById('calendarButton').addEventListener('click', downloadCalendar);
     document.getElementById('calendarButtonBottom').addEventListener('click', downloadCalendar);
 
-    // Christmas jazz ambience. Browsers often block unmuted autoplay on a first visit,
-    // so the page attempts audible autoplay first and falls back to muted autoplay.
-    // The floating button always lets the guest mute or enable the music with one tap.
+    // Christmas jazz ambience. The invitation always attempts audible autoplay.
+    // Modern browsers may block sound until the first user gesture; when that happens,
+    // the first interaction anywhere on the invitation retries playback WITH sound.
+    // The page never automatically falls back to muted playback.
     let musicPlayer = null;
     let musicReady = false;
-    let musicRequestedAudible = true;
+    let musicUserMuted = false;
     const christmasVideoId = 'fj0WVcj93to';
     const christmasStartSeconds = 936; // Instrumental jazz section in the selected no-copyright mix.
 
-    function setMusicButtonState({ loading = false, muted = false } = {}) {
+    function setMusicButtonState({ loading = false, muted = false, paused = false } = {}) {
       musicToggle.classList.toggle('is-loading', loading);
       musicToggle.classList.toggle('is-muted', muted);
+      musicToggle.classList.toggle('is-paused', paused);
       updateMusicAccessibility(translations[currentLanguage] || translations.en);
     }
 
     function startMusicAudible() {
-      if (!musicReady || !musicPlayer) return;
-      musicRequestedAudible = true;
+      if (!musicReady || !musicPlayer) return false;
+      musicUserMuted = false;
       musicPlayer.setVolume(22);
       musicPlayer.unMute();
       musicPlayer.playVideo();
-      setMusicButtonState({ muted: false });
+      setMusicButtonState({ muted: false, paused: false });
+      return true;
     }
 
     function startMusicMuted() {
       if (!musicReady || !musicPlayer) return;
-      musicRequestedAudible = false;
+      musicUserMuted = true;
       musicPlayer.mute();
       musicPlayer.playVideo();
-      setMusicButtonState({ muted: true });
+      setMusicButtonState({ muted: true, paused: false });
     }
 
-    musicToggle.addEventListener('click', () => {
-      if (!musicReady || !musicPlayer) {
-        musicRequestedAudible = true;
+    function removeMusicUnlockListeners() {
+      document.removeEventListener('pointerdown', unlockMusicOnGesture, true);
+      document.removeEventListener('keydown', unlockMusicOnGesture, true);
+    }
+
+    function unlockMusicOnGesture(event) {
+      // Do not pre-handle the dedicated control; its click handler owns that action.
+      if (musicToggle.contains(event.target) || musicUserMuted || !musicReady || !musicPlayer) return;
+      const state = musicPlayer.getPlayerState();
+      if (state === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
+        removeMusicUnlockListeners();
         return;
       }
-      if (musicPlayer.isMuted()) {
+      startMusicAudible();
+      window.setTimeout(() => {
+        if (musicPlayer && musicPlayer.getPlayerState() === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
+          removeMusicUnlockListeners();
+        }
+      }, 180);
+    }
+
+    document.addEventListener('pointerdown', unlockMusicOnGesture, true);
+    document.addEventListener('keydown', unlockMusicOnGesture, true);
+
+    musicToggle.addEventListener('click', () => {
+      if (!musicReady || !musicPlayer) return;
+      const isPlaying = musicPlayer.getPlayerState() === YT.PlayerState.PLAYING;
+      if (musicPlayer.isMuted() || !isPlaying) {
         startMusicAudible();
       } else {
         startMusicMuted();
@@ -1315,29 +1402,34 @@
             event.target.setVolume(22);
             event.target.unMute();
             event.target.playVideo();
-            setMusicButtonState({ loading: true, muted: false });
+            setMusicButtonState({ loading: true, muted: false, paused: false });
 
             window.setTimeout(() => {
               const playing = event.target.getPlayerState() === YT.PlayerState.PLAYING;
               const muted = event.target.isMuted();
-              if (!playing || muted) {
-                // Reliable fallback for browser autoplay policies.
-                event.target.mute();
-                event.target.playVideo();
-                setMusicButtonState({ muted: true });
+              if (playing && !muted) {
+                setMusicButtonState({ muted: false, paused: false });
+                removeMusicUnlockListeners();
               } else {
-                setMusicButtonState({ muted: false });
+                // Sound autoplay was blocked. Keep it unmuted and retry on the guest's
+                // first interaction with the page instead of silently playing muted.
+                event.target.unMute();
+                setMusicButtonState({ muted: false, paused: true });
               }
             }, 1200);
           },
           onStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING && !musicPlayer.isMuted()) {
+              setMusicButtonState({ muted: false, paused: false });
+              removeMusicUnlockListeners();
+            }
             if (event.data === YT.PlayerState.ENDED) {
               musicPlayer.seekTo(christmasStartSeconds, true);
               musicPlayer.playVideo();
             }
           },
           onError() {
-            setMusicButtonState({ muted: true });
+            setMusicButtonState({ muted: false, paused: true });
           }
         }
       });
