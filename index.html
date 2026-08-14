@@ -1,1 +1,962 @@
-<h1>site in the progress<h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#651727">
+  <meta name="description" content="Wedding invitation for Marek & Theres — 12 December 2026, Trollhättan, Sweden.">
+  <title>Marek & Theres — 12.12.2026</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Italianno&display=swap');
+
+    :root {
+      --burgundy-950: #300912;
+      --burgundy-900: #430d19;
+      --burgundy-800: #581321;
+      --burgundy-700: #6b1828;
+      --burgundy-600: #7c2132;
+      --ivory: #fbf7ee;
+      --ivory-deep: #f1e7d8;
+      --paper: #fffaf1;
+      --ink: #3a1720;
+      --muted: #755d61;
+      --gold: #b89a62;
+      --gold-soft: #d5c297;
+      --border: rgba(184, 154, 98, .62);
+      --shadow: 0 28px 70px rgba(35, 5, 12, .20);
+      --serif: "Bodoni Moda", "Bodoni MT", Didot, Georgia, serif;
+      --script: "Italianno", "Bickham Script Pro", "Snell Roundhand", cursive;
+      --nav-h: 76px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 18px); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(255,255,255,.07) 0 1px, transparent 1.6px) 0 0 / 26px 26px,
+        radial-gradient(circle at 84% 76%, rgba(213,194,151,.08) 0 1px, transparent 1.7px) 0 0 / 34px 34px,
+        var(--burgundy-900);
+      font-family: var(--serif);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    section { position: relative; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(67, 13, 25, .94);
+      border-bottom: 1px solid rgba(213, 194, 151, .32);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-wrap {
+      width: min(1180px, calc(100% - 34px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ivory);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 34px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold-soft);
+      border-radius: 50%;
+      font-family: var(--script);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .brand-text {
+      font-size: 14px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      position: relative;
+      color: rgba(251, 247, 238, .83);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: color .25s ease;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -8px;
+      height: 1px;
+      background: var(--gold-soft);
+      transition: right .25s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: #fff; }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { right: 0; }
+
+    .language-switcher {
+      display: inline-flex;
+      padding: 3px;
+      border: 1px solid rgba(213, 194, 151, .45);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
+    .language-switcher button {
+      border: 0;
+      border-radius: 999px;
+      padding: 7px 9px 6px;
+      color: rgba(251, 247, 238, .72);
+      background: transparent;
+      font: 600 10px/1 var(--serif);
+      letter-spacing: .08em;
+      cursor: pointer;
+    }
+    .language-switcher button.active {
+      color: var(--burgundy-900);
+      background: var(--ivory);
+    }
+
+    .menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(213,194,151,.45);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ivory);
+      cursor: pointer;
+      font-size: 19px;
+    }
+
+    .hero {
+      min-height: calc(100svh - var(--nav-h));
+      padding: clamp(34px, 7vw, 84px) 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    .invitation-card {
+      position: relative;
+      width: min(800px, 100%);
+      padding: clamp(50px, 9vw, 100px) clamp(24px, 8vw, 86px);
+      text-align: center;
+      background:
+        linear-gradient(rgba(255,250,241,.94), rgba(255,250,241,.94)),
+        repeating-linear-gradient(0deg, rgba(70,30,22,.03) 0 1px, transparent 1px 4px);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .invitation-card::before,
+    .invitation-card::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+    .invitation-card::before { inset: 16px; border: 1px solid var(--gold); }
+    .invitation-card::after { inset: 23px; border: 1px solid rgba(184,154,98,.34); }
+
+    .hero-kicker,
+    .eyebrow {
+      margin: 0 0 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .27em;
+      text-transform: uppercase;
+      color: var(--burgundy-700);
+    }
+
+    .ornament {
+      width: 100px;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold);
+      font-size: 15px;
+    }
+    .ornament::before,
+    .ornament::after { content: ""; flex: 1; height: 1px; background: currentColor; }
+
+    .couple-name {
+      margin: 0;
+      color: var(--burgundy-800);
+      font-family: var(--script);
+      font-size: clamp(74px, 13vw, 132px);
+      font-weight: 400;
+      line-height: .77;
+      letter-spacing: -.015em;
+    }
+
+    .hero-date {
+      margin: 38px 0 0;
+      font-size: clamp(22px, 4vw, 34px);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .hero-place {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      width: min(550px, 100%);
+      margin: 34px auto 0;
+      font-size: clamp(16px, 2vw, 19px);
+      font-style: italic;
+      color: #5b343b;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 46px;
+      padding: 12px 20px 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid var(--burgundy-700);
+      border-radius: 999px;
+      background: var(--burgundy-700);
+      color: var(--ivory);
+      text-decoration: none;
+      font: 600 11px/1.2 var(--serif);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--burgundy-800); }
+    .button.button-outline { color: var(--burgundy-700); background: transparent; }
+    .button.button-outline:hover { color: var(--ivory); background: var(--burgundy-700); }
+
+    .section-light { background: var(--ivory); }
+    .section-burgundy { color: var(--ivory); background: var(--burgundy-800); }
+    .section-inner {
+      width: min(1100px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: clamp(74px, 9vw, 118px) 0;
+    }
+
+    .section-heading {
+      width: min(760px, 100%);
+      margin: 0 auto 54px;
+      text-align: center;
+    }
+    .section-heading .script {
+      display: block;
+      margin-bottom: -8px;
+      color: var(--burgundy-700);
+      font-family: var(--script);
+      font-size: clamp(50px, 8vw, 78px);
+      font-weight: 400;
+      line-height: .95;
+    }
+    .section-burgundy .section-heading .script { color: var(--gold-soft); }
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(31px, 5vw, 50px);
+      font-weight: 500;
+      line-height: 1.08;
+    }
+    .section-heading p {
+      margin: 18px auto 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .section-burgundy .section-heading p { color: rgba(251,247,238,.72); }
+
+    .timeline {
+      position: relative;
+      width: min(900px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      bottom: 34px;
+      left: 50%;
+      width: 1px;
+      background: rgba(184,154,98,.45);
+    }
+
+    .event-card {
+      position: relative;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid var(--border);
+      background: rgba(255,250,241,.62);
+    }
+    .event-card:nth-child(2) { margin-top: 72px; }
+    .event-number {
+      margin-bottom: 26px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+    }
+    .event-time {
+      margin: 0 0 4px;
+      color: var(--burgundy-700);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .event-card h3 {
+      margin: 0 0 14px;
+      font-size: clamp(25px, 3.4vw, 36px);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+    .address { margin: 0 0 26px; color: var(--muted); font-size: 14px; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--burgundy-700);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(107,24,40,.28);
+    }
+
+    .stay-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: clamp(34px, 7vw, 82px);
+      align-items: start;
+    }
+    .stay-highlight {
+      position: sticky;
+      top: calc(var(--nav-h) + 30px);
+      padding: 40px;
+      border: 1px solid rgba(213,194,151,.45);
+      background: rgba(255,255,255,.035);
+    }
+    .stay-highlight h3 {
+      margin: 0;
+      color: var(--gold-soft);
+      font-size: 32px;
+      font-weight: 500;
+    }
+    .stay-highlight .hotel-address { color: rgba(251,247,238,.65); font-size: 14px; }
+    .booking-code {
+      margin: 30px 0 20px;
+      padding: 18px;
+      border: 1px dashed rgba(213,194,151,.58);
+      text-align: center;
+    }
+    .booking-code span {
+      display: block;
+      color: rgba(251,247,238,.62);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .booking-code strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ivory);
+      font-size: 26px;
+      letter-spacing: .12em;
+    }
+    .deadline {
+      margin-top: 18px;
+      color: var(--gold-soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    .stay-highlight .button {
+      width: 100%;
+      border-color: var(--ivory);
+      background: var(--ivory);
+      color: var(--burgundy-800);
+    }
+
+    .details-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: detail;
+    }
+    .details-list li {
+      position: relative;
+      padding: 19px 0 19px 50px;
+      border-bottom: 1px solid rgba(213,194,151,.20);
+      color: rgba(251,247,238,.84);
+      font-size: 14px;
+    }
+    .details-list li::before {
+      counter-increment: detail;
+      content: counter(detail, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 18px;
+      color: var(--gold-soft);
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    .other-hotels {
+      margin-top: 44px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(213,194,151,.34);
+    }
+    .other-hotels h4 { margin: 0 0 10px; font-size: 20px; font-weight: 500; }
+    .other-hotels p { margin: 0 0 18px; color: rgba(251,247,238,.68); font-size: 14px; }
+    .section-burgundy .text-link { color: var(--gold-soft); border-color: rgba(213,194,151,.34); }
+
+    .travel-card {
+      width: min(820px, 100%);
+      margin: 0 auto;
+      padding: clamp(28px, 6vw, 58px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      box-shadow: 0 18px 50px rgba(67,13,25,.08);
+    }
+    .travel-icon {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--burgundy-700);
+      font-size: 27px;
+    }
+    .travel-card h3 { margin: 0 0 9px; font-size: 28px; font-weight: 500; }
+    .travel-card p { margin: 0 0 18px; color: var(--muted); }
+    .travel-note { font-size: 12px; font-style: italic; }
+
+    .closing {
+      padding: clamp(90px, 12vw, 150px) 18px;
+      text-align: center;
+      color: var(--ivory);
+      background:
+        linear-gradient(rgba(48,9,18,.80), rgba(48,9,18,.88)),
+        radial-gradient(circle at 50% 0, #7c2132 0, #430d19 55%, #300912 100%);
+    }
+    .closing .script {
+      display: block;
+      color: var(--gold-soft);
+      font-family: var(--script);
+      font-size: clamp(58px, 10vw, 96px);
+      line-height: .92;
+    }
+    .closing h2 { margin: 6px 0 22px; font-size: clamp(29px, 5vw, 48px); font-weight: 500; }
+    .closing p { width: min(600px, 100%); margin: 0 auto 30px; color: rgba(251,247,238,.76); }
+
+    .footer {
+      padding: 28px 18px;
+      color: rgba(251,247,238,.58);
+      background: var(--burgundy-950);
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .menu-button { display: inline-grid; place-items: center; }
+      .nav-right { gap: 10px; }
+      .nav-links {
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        display: none;
+        padding: 18px 24px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 17px;
+        background: rgba(67,13,25,.98);
+        border-bottom: 1px solid rgba(213,194,151,.32);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 11px; }
+      .timeline { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .event-card:nth-child(2) { margin-top: 0; }
+      .stay-grid { grid-template-columns: 1fr; }
+      .stay-highlight { position: relative; top: auto; }
+    }
+
+    @media (max-width: 620px) {
+      :root { --nav-h: 68px; }
+      .nav-wrap { width: min(100% - 22px, 1180px); }
+      .brand-text { display: none; }
+      .language-switcher button { padding-inline: 8px; }
+      .invitation-card::before { inset: 10px; }
+      .invitation-card::after { inset: 16px; }
+      .couple-name { font-size: clamp(68px, 24vw, 104px); }
+      .hero-date { letter-spacing: .10em; }
+      .travel-card { grid-template-columns: 1fr; }
+      .travel-icon { width: 62px; height: 62px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Marek and Theres — home">
+        <span class="brand-mark">M&T</span>
+        <span class="brand-text">12 · 12 · 2026</span>
+      </a>
+
+      <div class="nav-right">
+        <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+          <a href="#home" data-i18n="navHome">Invitation</a>
+          <a href="#day" data-i18n="navDay">The day</a>
+          <a href="#stay" data-i18n="navStay">Accommodation</a>
+          <a href="#travel" data-i18n="navTravel">Travel</a>
+        </nav>
+
+        <div class="language-switcher" aria-label="Language switcher">
+          <button type="button" class="active" data-lang="en" aria-label="English">EN</button>
+          <button type="button" data-lang="sv" aria-label="Svenska">SV</button>
+          <button type="button" data-lang="cs" aria-label="Čeština">CZ</button>
+        </div>
+
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <article class="invitation-card reveal">
+        <p class="hero-kicker" data-i18n="heroKicker">Together with our families</p>
+        <div class="ornament" aria-hidden="true">✦</div>
+        <h1 class="couple-name">Marek &amp; Theres</h1>
+        <p class="hero-date" data-i18n="heroDate">12 December 2026</p>
+        <p class="hero-place">Trollhättan · Sweden</p>
+        <p class="hero-copy" data-i18n="heroCopy">With grateful hearts, we invite you to share this winter day with us as we celebrate our marriage, surrounded by the people we love most.</p>
+        <div class="hero-actions">
+          <a class="button" href="#day" data-i18n="viewDay">View the day</a>
+          <button class="button button-outline" type="button" id="calendarButton" data-i18n="addCalendar">Add to calendar</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-light" id="day">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="script" data-i18n="dayScript">Our wedding day</span>
+          <h2 data-i18n="dayTitle">Two places, one celebration</h2>
+          <p data-i18n="dayIntro">We would be truly grateful to celebrate with you. The ceremony begins in Trollhättan, followed by dinner, drinks and dancing at Folkets Park.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="event-card reveal">
+            <div class="event-number">01</div>
+            <p class="event-time">17:30</p>
+            <h3 data-i18n="churchTitle">Wedding ceremony</h3>
+            <p><strong>Katolska kyrkan i Trollhättan</strong></p>
+            <p class="address">Kungsgatan 44<br>461 34 Trollhättan</p>
+            <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Katolska+kyrkan+i+Trollhattan+Kungsgatan+44+461+34+Trollhattan" target="_blank" rel="noopener" data-i18n="openMap">Open map ↗</a>
+          </article>
+
+          <article class="event-card reveal">
+            <div class="event-number">02</div>
+            <p class="event-time">19:00 — 01:00</p>
+            <h3 data-i18n="eveningTitle">Evening celebration</h3>
+            <p><strong>Folkets Park</strong></p>
+            <p class="address">Kungsportsvägen 1<br>461 39 Trollhättan</p>
+            <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Folkets+Park+Kungsportsvagen+1+461+39+Trollhattan" target="_blank" rel="noopener" data-i18n="openMap">Open map ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-burgundy" id="stay">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="script" data-i18n="stayScript">Stay nearby</span>
+          <h2 data-i18n="stayTitle">Accommodation in Trollhättan</h2>
+          <p data-i18n="stayIntro">We have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.</p>
+        </div>
+
+        <div class="stay-grid">
+          <aside class="stay-highlight reveal">
+            <p class="eyebrow" data-i18n="recommendedHotel">Recommended hotel</p>
+            <h3>Scandic Swania</h3>
+            <p class="hotel-address">Storgatan 47–49<br>461 30 Trollhättan</p>
+
+            <div class="booking-code">
+              <span data-i18n="bookingCode">Booking code</span>
+              <strong>BMAR101226</strong>
+            </div>
+
+            <!-- Please verify this date: the supplied source text says 26 November 2027, after the 12 December 2026 wedding. -->
+            <p class="deadline"><span data-i18n="bookingDeadline">Last day for booking</span>: <strong data-i18n="deadlineDate">26 November 2027</strong></p>
+
+            <a class="button" href="https://www.scandichotels.com" target="_blank" rel="noopener" data-i18n="bookScandic">Book at Scandic ↗</a>
+          </aside>
+
+          <div class="reveal">
+            <ol class="details-list">
+              <li data-i18n="stayRule1">Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.</li>
+              <li data-i18n="stayRule2">When booking, give the code BMAR101226 to access the pre-booked wedding rate.</li>
+              <li data-i18n="stayRule3">Rooms are booked subject to availability.</li>
+              <li data-i18n="stayRule4">Payment is made at check-in by credit card.</li>
+              <li data-i18n="stayRule5">Credit card information is required at the time of booking to guarantee the room.</li>
+              <li data-i18n="stayRule6">Bookings are made individually and are treated as individual reservations.</li>
+              <li data-i18n="stayRule7">A reservation can be changed or cancelled until 18:00 on the day of arrival.</li>
+              <li data-i18n="stayRule8">For changes or cancellations after 18:00, the hotel has the right to charge for the booking.</li>
+              <li data-i18n="stayRule9">Each guest receives an individual confirmation when the reservation is made.</li>
+            </ol>
+
+            <div class="other-hotels">
+              <h4 data-i18n="otherHotelsTitle">Prefer another hotel?</h4>
+              <p data-i18n="otherHotelsCopy">Browse other accommodation options in Trollhättan for the wedding night.</p>
+              <a class="text-link" href="https://www.booking.com/searchresults.sv.html?ss=Trollh%C3%A4ttan&amp;ssne=Trollh%C3%A4ttan&amp;ssne_untouched=Trollh%C3%A4ttan&amp;efdco=1&amp;label=gog235jc-10CAMoyAFCC3Ryb2xsaGF0dGFuSCVYA2jIAYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCvID80wbAAgHSAiQyODljNjEzYy05YjYyLTQzMDMtYjUyNi1jODMwYzk0MWFmMDnYAgHgAgE&amp;aid=356980&amp;lang=sv&amp;sb=1&amp;src_elem=sb&amp;src=city&amp;dest_id=-2531222&amp;dest_type=city&amp;checkin=2026-12-12&amp;checkout=2026-12-13&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0&amp;sb_lp=1" target="_blank" rel="noopener" data-i18n="browseHotels">Browse hotels ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="travel">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="script" data-i18n="travelScript">Getting here</span>
+          <h2 data-i18n="travelTitle">Travel from the Czech Republic</h2>
+          <p data-i18n="travelIntro">For guests travelling from the Czech Republic, one convenient option is to fly from Kraków to Göteborg Landvetter and continue to Trollhättan.</p>
+        </div>
+
+        <article class="travel-card reveal">
+          <div class="travel-icon" aria-hidden="true">✈</div>
+          <div>
+            <p class="eyebrow" data-i18n="recommendedRoute">Recommended route</p>
+            <h3>Kraków (KRK) → Göteborg Landvetter (GOT)</h3>
+            <p data-i18n="travelCopy">Ryanair operates the Kraków–Gothenburg route. Please check the airline directly for the flight dates and times that best fit your stay.</p>
+            <a class="button button-outline" href="https://www.ryanair.com/flights/gb/en/flights-from-krakow-to-gothenburg" target="_blank" rel="noopener" data-i18n="checkFlights">Check Ryanair flights ↗</a>
+            <p class="travel-note" data-i18n="travelNote">Flight schedules can change, so confirm your itinerary before making non-refundable arrangements.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="reveal">
+        <span class="script" data-i18n="closingScript">With love</span>
+        <h2>Marek &amp; Theres</h2>
+        <p data-i18n="closingCopy">Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together.</p>
+        <button class="button" type="button" id="calendarButtonBottom" data-i18n="addCalendar">Add to calendar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Marek &amp; Theres · 12.12.2026 · Trollhättan
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navHome: "Invitation",
+        navDay: "The day",
+        navStay: "Accommodation",
+        navTravel: "Travel",
+        heroKicker: "Together with our families",
+        heroDate: "12 December 2026",
+        heroCopy: "With grateful hearts, we invite you to share this winter day with us as we celebrate our marriage, surrounded by the people we love most.",
+        viewDay: "View the day",
+        addCalendar: "Add to calendar",
+        dayScript: "Our wedding day",
+        dayTitle: "Two places, one celebration",
+        dayIntro: "We would be truly grateful to celebrate with you. The ceremony begins in Trollhättan, followed by dinner, drinks and dancing at Folkets Park.",
+        churchTitle: "Wedding ceremony",
+        eveningTitle: "Evening celebration",
+        openMap: "Open map ↗",
+        stayScript: "Stay nearby",
+        stayTitle: "Accommodation in Trollhättan",
+        stayIntro: "We have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.",
+        recommendedHotel: "Recommended hotel",
+        bookingCode: "Booking code",
+        bookingDeadline: "Last day for booking",
+        deadlineDate: "26 November 2027",
+        bookScandic: "Book at Scandic ↗",
+        stayRule1: "Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.",
+        stayRule2: "When booking, give the code BMAR101226 to access the pre-booked wedding rate.",
+        stayRule3: "Rooms are booked subject to availability.",
+        stayRule4: "Payment is made at check-in by credit card.",
+        stayRule5: "Credit card information is required at the time of booking to guarantee the room.",
+        stayRule6: "Bookings are made individually and are treated as individual reservations.",
+        stayRule7: "A reservation can be changed or cancelled until 18:00 on the day of arrival.",
+        stayRule8: "For changes or cancellations after 18:00, the hotel has the right to charge for the booking.",
+        stayRule9: "Each guest receives an individual confirmation when the reservation is made.",
+        otherHotelsTitle: "Prefer another hotel?",
+        otherHotelsCopy: "Browse other accommodation options in Trollhättan for the wedding night.",
+        browseHotels: "Browse hotels ↗",
+        travelScript: "Getting here",
+        travelTitle: "Travel from the Czech Republic",
+        travelIntro: "For guests travelling from the Czech Republic, one convenient option is to fly from Kraków to Göteborg Landvetter and continue to Trollhättan.",
+        recommendedRoute: "Recommended route",
+        travelCopy: "Ryanair operates the Kraków–Gothenburg route. Please check the airline directly for the flight dates and times that best fit your stay.",
+        checkFlights: "Check Ryanair flights ↗",
+        travelNote: "Flight schedules can change, so confirm your itinerary before making non-refundable arrangements.",
+        closingScript: "With love",
+        closingCopy: "Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together."
+      },
+      sv: {
+        navHome: "Inbjudan",
+        navDay: "Dagen",
+        navStay: "Boende",
+        navTravel: "Resa",
+        heroKicker: "Tillsammans med våra familjer",
+        heroDate: "12 december 2026",
+        heroCopy: "Med stor tacksamhet bjuder vi in er att dela denna vinterdag med oss när vi firar vårt bröllop, omgivna av de människor vi tycker allra mest om.",
+        viewDay: "Se dagens program",
+        addCalendar: "Lägg till i kalendern",
+        dayScript: "Vår bröllopsdag",
+        dayTitle: "Två platser, ett firande",
+        dayIntro: "Vi skulle vara oerhört glada och tacksamma över att få fira med er. Vigseln börjar i Trollhättan och följs av middag, dryck och dans på Folkets Park.",
+        churchTitle: "Vigsel",
+        eveningTitle: "Kvällsfirande",
+        openMap: "Öppna karta ↗",
+        stayScript: "Bo nära",
+        stayTitle: "Boende i Trollhättan",
+        stayIntro: "Vi har ordnat ett förbokat bröllopspris på Scandic Swania. Rummen bokas i mån av tillgänglighet, så vi rekommenderar att boka i god tid.",
+        recommendedHotel: "Rekommenderat hotell",
+        bookingCode: "Bokningskod",
+        bookingDeadline: "Sista bokningsdag",
+        deadlineDate: "26 november 2027",
+        bookScandic: "Boka på Scandic ↗",
+        stayRule1: "Boka via scandichotels.com eller ring Scandics centrala bokning på +46 8 517 517 00 och tryck 1.",
+        stayRule2: "Ange bokningskod BMAR101226 för att få det förbokade bröllopspriset.",
+        stayRule3: "Rummen bokas i mån av tillgänglighet.",
+        stayRule4: "Betalning sker med kreditkort vid incheckning.",
+        stayRule5: "Kreditkortsuppgifter måste lämnas vid bokningstillfället för att garantera hotellrummet.",
+        stayRule6: "Varje bokning görs individuellt och behandlas som en individuell reservation.",
+        stayRule7: "Reservationen kan ändras eller avbokas fram till kl. 18.00 på ankomstdagen.",
+        stayRule8: "Vid ändring eller avbokning efter kl. 18.00 har hotellet rätt att debitera bokningen.",
+        stayRule9: "Varje gäst får en individuell bekräftelse i samband med bokningen.",
+        otherHotelsTitle: "Föredrar ni ett annat hotell?",
+        otherHotelsCopy: "Se fler boendealternativ i Trollhättan för bröllopsnatten.",
+        browseHotels: "Se hotell ↗",
+        travelScript: "Hitta hit",
+        travelTitle: "Resa från Tjeckien",
+        travelIntro: "För gäster som reser från Tjeckien är ett smidigt alternativ att flyga från Kraków till Göteborg Landvetter och fortsätta vidare till Trollhättan.",
+        recommendedRoute: "Rekommenderad resväg",
+        travelCopy: "Ryanair trafikerar sträckan Kraków–Göteborg. Kontrollera aktuella flygdatum och tider direkt hos flygbolaget när ni planerar resan.",
+        checkFlights: "Se Ryanair-flyg ↗",
+        travelNote: "Flygtider kan ändras, så bekräfta resplanen innan ni gör bokningar som inte kan återbetalas.",
+        closingScript: "Med kärlek",
+        closingCopy: "Tack för att ni är en del av våra liv. Det betyder oerhört mycket för oss att få ha er med när vi börjar detta nya kapitel tillsammans."
+      },
+      cs: {
+        navHome: "Pozvání",
+        navDay: "Program",
+        navStay: "Ubytování",
+        navTravel: "Cesta",
+        heroKicker: "Společně s našimi rodinami",
+        heroDate: "12. prosince 2026",
+        heroCopy: "S radostí a vděčností vás zveme, abyste s námi prožili tento zimní den a oslavili naši svatbu mezi lidmi, které máme nejraději.",
+        viewDay: "Zobrazit program",
+        addCalendar: "Přidat do kalendáře",
+        dayScript: "Náš svatební den",
+        dayTitle: "Dvě místa, jedna oslava",
+        dayIntro: "Budeme velmi rádi, když tento den oslavíte s námi. Obřad začne v Trollhättanu a poté se přesuneme na večeři, přípitek a tanec do Folkets Park.",
+        churchTitle: "Svatební obřad",
+        eveningTitle: "Večerní oslava",
+        openMap: "Otevřít mapu ↗",
+        stayScript: "Zůstaňte poblíž",
+        stayTitle: "Ubytování v Trollhättanu",
+        stayIntro: "V hotelu Scandic Swania jsme zajistili předem rezervovanou svatební cenu. Pokoje jsou k dispozici podle aktuální obsazenosti, proto doporučujeme rezervovat včas.",
+        recommendedHotel: "Doporučený hotel",
+        bookingCode: "Rezervační kód",
+        bookingDeadline: "Poslední den pro rezervaci",
+        deadlineDate: "26. listopadu 2027",
+        bookScandic: "Rezervovat ve Scandicu ↗",
+        stayRule1: "Rezervaci proveďte přes scandichotels.com nebo telefonicky přes centrální rezervační kancelář na +46 8 517 517 00 a poté stiskněte 1.",
+        stayRule2: "Při rezervaci uveďte kód BMAR101226 pro využití předem rezervované svatební ceny.",
+        stayRule3: "Pokoje jsou rezervovány podle aktuální dostupnosti.",
+        stayRule4: "Platba proběhne při check-inu kreditní kartou.",
+        stayRule5: "Pro garanci pokoje je při rezervaci nutné uvést údaje o kreditní kartě.",
+        stayRule6: "Každý host provádí rezervaci samostatně a rezervace je vedena jako individuální.",
+        stayRule7: "Rezervaci lze změnit nebo zrušit do 18:00 v den příjezdu.",
+        stayRule8: "Při změně nebo zrušení po 18:00 má hotel právo požadovat úhradu rezervace.",
+        stayRule9: "Každý host obdrží při vytvoření rezervace vlastní potvrzení.",
+        otherHotelsTitle: "Dáváte přednost jinému hotelu?",
+        otherHotelsCopy: "Prohlédněte si další možnosti ubytování v Trollhättanu na svatební noc.",
+        browseHotels: "Prohlédnout hotely ↗",
+        travelScript: "Jak se k nám dostat",
+        travelTitle: "Cesta z České republiky",
+        travelIntro: "Pro hosty cestující z České republiky je praktickou možností let z Krakova na letiště Göteborg Landvetter a následná cesta do Trollhättanu.",
+        recommendedRoute: "Doporučená trasa",
+        travelCopy: "Ryanair provozuje spojení Krakov–Göteborg. Při plánování cesty si prosím ověřte aktuální termíny a časy letů přímo u letecké společnosti.",
+        checkFlights: "Zkontrolovat lety Ryanair ↗",
+        travelNote: "Letové řády se mohou měnit, proto si před nákupem nevratných služeb potvrďte celý itinerář.",
+        closingScript: "S láskou",
+        closingCopy: "Děkujeme, že jste součástí našich životů. Moc pro nás znamená, že budete s námi, když společně otevřeme tuto novou kapitolu."
+      }
+    };
+
+    const languageButtons = document.querySelectorAll('[data-lang]');
+    const translatableElements = document.querySelectorAll('[data-i18n]');
+
+    function setLanguage(lang) {
+      const dictionary = translations[lang] || translations.en;
+      document.documentElement.lang = lang;
+      translatableElements.forEach((element) => {
+        const key = element.dataset.i18n;
+        if (dictionary[key]) element.textContent = dictionary[key];
+      });
+      languageButtons.forEach((button) => {
+        const isActive = button.dataset.lang === lang;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+      try { localStorage.setItem('wedding-language', lang); } catch (error) { /* file:// privacy mode fallback */ }
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener('click', () => setLanguage(button.dataset.lang));
+    });
+
+    let savedLanguage = null;
+    try { savedLanguage = localStorage.getItem('wedding-language'); } catch (error) { /* file:// privacy mode fallback */ }
+    const browserLanguage = navigator.language?.toLowerCase() || 'en';
+    const initialLanguage = savedLanguage || (browserLanguage.startsWith('sv') ? 'sv' : browserLanguage.startsWith('cs') ? 'cs' : 'en');
+    setLanguage(initialLanguage);
+
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    const calendarContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Marek and Theres Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE',
+      'TZID:Europe/Stockholm',
+      'X-LIC-LOCATION:Europe/Stockholm',
+      'BEGIN:DAYLIGHT',
+      'TZOFFSETFROM:+0100',
+      'TZOFFSETTO:+0200',
+      'TZNAME:CEST',
+      'DTSTART:19700329T020000',
+      'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+      'END:DAYLIGHT',
+      'BEGIN:STANDARD',
+      'TZOFFSETFROM:+0200',
+      'TZOFFSETTO:+0100',
+      'TZNAME:CET',
+      'DTSTART:19701025T030000',
+      'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+      'END:STANDARD',
+      'END:VTIMEZONE',
+      'BEGIN:VEVENT',
+      'UID:marek-theres-wedding-20261212@invitation',
+      'DTSTAMP:20260814T120000Z',
+      'DTSTART;TZID=Europe/Stockholm:20261212T173000',
+      'DTEND;TZID=Europe/Stockholm:20261213T010000',
+      'SUMMARY:Marek & Theres — Wedding',
+      'LOCATION:Katolska kyrkan i Trollhättan / Folkets Park, Trollhättan, Sweden',
+      'DESCRIPTION:Wedding day in Trollhättan.\\n17:30 — Ceremony: Katolska kyrkan i Trollhättan, Kungsgatan 44, 461 34 Trollhättan.\\n19:00–01:00 — Evening celebration: Folkets Park, Kungsportsvägen 1, 461 39 Trollhättan.\\nAccommodation: Scandic Swania, Storgatan 47–49. Booking code: BMAR101226.',
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    function downloadCalendar() {
+      const blob = new Blob([calendarContent], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'marek-theres-wedding-2026.ics';
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('calendarButton').addEventListener('click', downloadCalendar);
+    document.getElementById('calendarButtonBottom').addEventListener('click', downloadCalendar);
+  </script>
+</body>
+</html>
