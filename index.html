@@ -8,7 +8,7 @@
   <title>Marek & Theres — 12.12.2026</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Italianno&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Italianno&display=swap');
 
     :root {
       --burgundy-950: #300912;
@@ -66,43 +66,50 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 34px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
+      gap: 20px;
+      flex: 0 0 auto;
       color: var(--ivory);
       text-decoration: none;
       white-space: nowrap;
     }
 
     .brand-mark {
-      width: 34px;
-      aspect-ratio: 1;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
       display: grid;
       place-items: center;
+      overflow: hidden;
       border: 1px solid var(--gold-soft);
       border-radius: 50%;
       font-family: var(--script);
-      font-size: 22px;
+      font-size: 16px;
+      letter-spacing: -.04em;
       line-height: 1;
     }
 
     .brand-text {
-      font-size: 14px;
-      letter-spacing: .16em;
+      margin-left: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .17em;
       text-transform: uppercase;
     }
 
-    .nav-right { display: flex; align-items: center; gap: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 24px; min-width: 0; }
     .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav-links a {
       position: relative;
-      color: rgba(251, 247, 238, .83);
+      color: rgba(251, 247, 238, .92);
       text-decoration: none;
       font-size: 12px;
+      font-weight: 600;
       letter-spacing: .13em;
       text-transform: uppercase;
       transition: color .25s ease;
@@ -185,9 +192,9 @@
     .hero-kicker,
     .eyebrow {
       margin: 0 0 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .27em;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .23em;
       text-transform: uppercase;
       color: var(--burgundy-700);
     }
@@ -212,6 +219,17 @@
       font-weight: 400;
       line-height: .77;
       letter-spacing: -.015em;
+      text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
+    }
+
+    .invitation-request {
+      width: min(560px, 100%);
+      margin: 4px auto 28px;
+      color: #5a3038;
+      font-size: clamp(14px, 1.8vw, 17px);
+      font-weight: 600;
+      line-height: 1.65;
+      letter-spacing: .035em;
     }
 
     .hero-date {
@@ -233,9 +251,10 @@
     .hero-copy {
       width: min(550px, 100%);
       margin: 34px auto 0;
-      font-size: clamp(16px, 2vw, 19px);
+      font-size: clamp(17px, 2.1vw, 20px);
+      font-weight: 500;
       font-style: italic;
-      color: #5b343b;
+      color: #4d2830;
     }
 
     .hero-actions {
@@ -289,6 +308,7 @@
       font-size: clamp(50px, 8vw, 78px);
       font-weight: 400;
       line-height: .95;
+      text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
     }
     .section-burgundy .section-heading .script { color: var(--gold-soft); }
     .section-heading h2 {
@@ -301,9 +321,11 @@
       margin: 18px auto 0;
       max-width: 640px;
       color: var(--muted);
-      font-size: 15px;
+      color: #63484d;
+      font-size: 16px;
+      font-weight: 500;
     }
-    .section-burgundy .section-heading p { color: rgba(251,247,238,.72); }
+    .section-burgundy .section-heading p { color: rgba(251,247,238,.88); }
 
     .timeline {
       position: relative;
@@ -351,7 +373,7 @@
       font-weight: 500;
       line-height: 1.15;
     }
-    .address { margin: 0 0 26px; color: var(--muted); font-size: 14px; }
+    .address { margin: 0 0 26px; color: #63484d; font-size: 15px; font-weight: 500; }
     .text-link {
       display: inline-flex;
       align-items: center;
@@ -428,8 +450,9 @@
       position: relative;
       padding: 19px 0 19px 50px;
       border-bottom: 1px solid rgba(213,194,151,.20);
-      color: rgba(251,247,238,.84);
-      font-size: 14px;
+      color: rgba(251,247,238,.92);
+      font-size: 15px;
+      font-weight: 500;
     }
     .details-list li::before {
       counter-increment: detail;
@@ -448,7 +471,7 @@
       border-top: 1px solid rgba(213,194,151,.34);
     }
     .other-hotels h4 { margin: 0 0 10px; font-size: 20px; font-weight: 500; }
-    .other-hotels p { margin: 0 0 18px; color: rgba(251,247,238,.68); font-size: 14px; }
+    .other-hotels p { margin: 0 0 18px; color: rgba(251,247,238,.86); font-size: 15px; font-weight: 500; }
     .section-burgundy .text-link { color: var(--gold-soft); border-color: rgba(213,194,151,.34); }
 
     .travel-card {
@@ -473,8 +496,182 @@
       font-size: 27px;
     }
     .travel-card h3 { margin: 0 0 9px; font-size: 28px; font-weight: 500; }
-    .travel-card p { margin: 0 0 18px; color: var(--muted); }
-    .travel-note { font-size: 12px; font-style: italic; }
+    .travel-card p { margin: 0 0 18px; color: #63484d; font-size: 15px; font-weight: 500; }
+    .travel-note { font-size: 13px; font-weight: 500; font-style: italic; }
+
+    .rsvp-card {
+      position: relative;
+      width: min(790px, 100%);
+      margin: 0 auto;
+      padding: clamp(38px, 7vw, 66px) clamp(24px, 7vw, 68px);
+      text-align: center;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(rgba(255,250,241,.96), rgba(255,250,241,.96)),
+        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
+      box-shadow: 0 18px 50px rgba(67,13,25,.08);
+    }
+    .rsvp-card::before {
+      content: "";
+      position: absolute;
+      inset: 11px;
+      pointer-events: none;
+      border: 1px solid rgba(184,154,98,.35);
+    }
+    .rsvp-card .script {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--burgundy-700);
+      font-family: var(--script);
+      font-size: clamp(54px, 9vw, 82px);
+      line-height: .9;
+      text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
+    }
+    .rsvp-card h2 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+    }
+    .rsvp-copy {
+      width: min(590px, 100%);
+      margin: 20px auto 0;
+      color: #63484d;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .rsvp-deadline {
+      margin: 30px 0 26px;
+      color: var(--burgundy-700);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .rsvp-deadline strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--ink);
+      font-size: clamp(23px, 3vw, 31px);
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: none;
+    }
+    .rsvp-note {
+      width: min(590px, 100%);
+      margin: 18px auto 0;
+      color: #755d61;
+      font-size: 13px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .closing .button.button-outline { color: var(--ivory); border-color: rgba(251,247,238,.82); }
+    .closing .button.button-outline:hover { color: var(--burgundy-800); background: var(--ivory); }
+
+    .closing-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-contact {
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: none;
+    }
+    .footer-contact a {
+      color: var(--gold-soft);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(213,194,151,.35);
+    }
+    .footer-contact a:hover,
+    .footer-contact a:focus-visible { color: var(--ivory); }
+
+    .music-player {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      left: -10px;
+      bottom: -10px;
+      opacity: .001;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .music-toggle {
+      position: fixed;
+      right: max(20px, env(safe-area-inset-right));
+      bottom: max(20px, env(safe-area-inset-bottom));
+      z-index: 1400;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(213,194,151,.72);
+      border-radius: 50%;
+      background: rgba(67,13,25,.96);
+      color: var(--ivory);
+      box-shadow: 0 10px 30px rgba(35,5,12,.28);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      backdrop-filter: blur(10px);
+    }
+    .music-toggle:hover,
+    .music-toggle:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      background: var(--burgundy-700);
+      box-shadow: 0 13px 34px rgba(35,5,12,.34);
+      outline: none;
+    }
+    .music-icon {
+      position: relative;
+      z-index: 1;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .music-slash {
+      position: absolute;
+      width: 28px;
+      height: 1.5px;
+      border-radius: 2px;
+      background: var(--gold-soft);
+      opacity: 0;
+      transform: rotate(-45deg);
+      transition: opacity .2s ease;
+    }
+    .music-toggle.is-muted .music-slash { opacity: 1; }
+    .music-toggle.is-loading { animation: musicPulse 1.8s ease-in-out infinite; }
+    .music-toggle::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 66px;
+      width: max-content;
+      max-width: 190px;
+      padding: 7px 10px;
+      border: 1px solid rgba(213,194,151,.35);
+      border-radius: 999px;
+      background: rgba(48,9,18,.94);
+      color: var(--ivory);
+      font: 600 10px/1.2 var(--serif);
+      letter-spacing: .06em;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(6px);
+      transition: opacity .2s ease, transform .2s ease;
+      white-space: nowrap;
+    }
+    .music-toggle:hover::before,
+    .music-toggle:focus-visible::before {
+      opacity: 1;
+      transform: none;
+    }
+    @keyframes musicPulse {
+      0%, 100% { box-shadow: 0 10px 30px rgba(35,5,12,.28), 0 0 0 0 rgba(213,194,151,.22); }
+      50% { box-shadow: 0 10px 30px rgba(35,5,12,.28), 0 0 0 9px rgba(213,194,151,0); }
+    }
 
     .closing {
       padding: clamp(90px, 12vw, 150px) 18px;
@@ -490,9 +687,10 @@
       font-family: var(--script);
       font-size: clamp(58px, 10vw, 96px);
       line-height: .92;
+      text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
     }
     .closing h2 { margin: 6px 0 22px; font-size: clamp(29px, 5vw, 48px); font-weight: 500; }
-    .closing p { width: min(600px, 100%); margin: 0 auto 30px; color: rgba(251,247,238,.76); }
+    .closing p { width: min(620px, 100%); margin: 0 auto 30px; color: rgba(251,247,238,.90); font-size: 16px; font-weight: 500; }
 
     .footer {
       padding: 28px 18px;
@@ -507,7 +705,7 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    @media (max-width: 860px) {
+    @media (max-width: 980px) {
       .menu-button { display: inline-grid; place-items: center; }
       .nav-right { gap: 10px; }
       .nav-links {
@@ -543,6 +741,7 @@
       .hero-date { letter-spacing: .10em; }
       .travel-card { grid-template-columns: 1fr; }
       .travel-icon { width: 62px; height: 62px; }
+      .music-toggle { width: 54px; height: 54px; right: 16px; bottom: 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -566,6 +765,7 @@
           <a href="#day" data-i18n="navDay">The day</a>
           <a href="#stay" data-i18n="navStay">Accommodation</a>
           <a href="#travel" data-i18n="navTravel">Travel</a>
+          <a href="#rsvp" data-i18n="navRsvp">RSVP</a>
         </nav>
 
         <div class="language-switcher" aria-label="Language switcher">
@@ -582,12 +782,13 @@
   <main>
     <section class="hero" id="home">
       <article class="invitation-card reveal">
-        <p class="hero-kicker" data-i18n="heroKicker">Together with our families</p>
+        <p class="hero-kicker" data-i18n="heroKicker">The Spányik family &amp; the Saad family</p>
         <div class="ornament" aria-hidden="true">✦</div>
+        <p class="invitation-request" data-i18n="heroRequest">joyfully invite you to witness and celebrate the marriage of</p>
         <h1 class="couple-name">Marek &amp; Theres</h1>
         <p class="hero-date" data-i18n="heroDate">12 December 2026</p>
         <p class="hero-place">Trollhättan · Sweden</p>
-        <p class="hero-copy" data-i18n="heroCopy">With grateful hearts, we invite you to share this winter day with us as we celebrate our marriage, surrounded by the people we love most.</p>
+        <p class="hero-copy" data-i18n="heroCopy">With grateful hearts, we would be honoured to share this winter day with you, surrounded by the people we love most.</p>
         <div class="hero-actions">
           <a class="button" href="#day" data-i18n="viewDay">View the day</a>
           <button class="button button-outline" type="button" id="calendarButton" data-i18n="addCalendar">Add to calendar</button>
@@ -694,19 +895,42 @@
       </div>
     </section>
 
+    <section class="section-light" id="rsvp">
+      <div class="section-inner">
+        <article class="rsvp-card reveal">
+          <span class="script" data-i18n="rsvpScript">Kindly reply</span>
+          <h2 data-i18n="rsvpTitle">Will you celebrate with us?</h2>
+          <p class="rsvp-copy" data-i18n="rsvpCopy">To help us with the final arrangements, please let us know whether you will be able to join us.</p>
+          <p class="rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Please RSVP by</span><strong data-i18n="rsvpDeadlineDate">31 October 2026</strong></p>
+          <a class="button" id="rsvpEmailButton" data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com" data-i18n="rsvpButton">Send your RSVP</a>
+          <p class="rsvp-note" data-i18n="rsvpNote">The email opens to both of us. Please tell us who is attending and include any dietary requirements or helpful notes.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="closing">
       <div class="reveal">
         <span class="script" data-i18n="closingScript">With love</span>
         <h2>Marek &amp; Theres</h2>
         <p data-i18n="closingCopy">Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together.</p>
-        <button class="button" type="button" id="calendarButtonBottom" data-i18n="addCalendar">Add to calendar</button>
+        <div class="closing-actions">
+          <a class="button" href="#rsvp" data-i18n="rsvpButtonShort">RSVP</a>
+          <button class="button button-outline" type="button" id="calendarButtonBottom" data-i18n="addCalendar">Add to calendar</button>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    Marek &amp; Theres · 12.12.2026 · Trollhättan
+    <div>Marek &amp; Theres · 12.12.2026 · Trollhättan</div>
+    <div class="footer-contact"><span data-i18n="contactLabel">Contact / RSVP</span>: <a data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com">marek.spanyik@vsb.cz · theressaa.ts@gmail.com</a></div>
   </footer>
+
+  <div class="music-player" id="youtubeMusic" aria-hidden="true"></div>
+  <button class="music-toggle is-loading" id="musicToggle" type="button" aria-label="Loading Christmas music" data-tooltip="Loading Christmas music">
+    <span class="music-icon" aria-hidden="true">♫</span>
+    <span class="music-slash" aria-hidden="true"></span>
+  </button>
 
   <script>
     const translations = {
@@ -715,9 +939,11 @@
         navDay: "The day",
         navStay: "Accommodation",
         navTravel: "Travel",
-        heroKicker: "Together with our families",
+        navRsvp: "RSVP",
+        heroKicker: "The Spányik family & the Saad family",
+        heroRequest: "joyfully invite you to witness and celebrate the marriage of",
         heroDate: "12 December 2026",
-        heroCopy: "With grateful hearts, we invite you to share this winter day with us as we celebrate our marriage, surrounded by the people we love most.",
+        heroCopy: "With grateful hearts, we would be honoured to share this winter day with you, surrounded by the people we love most.",
         viewDay: "View the day",
         addCalendar: "Add to calendar",
         dayScript: "Our wedding day",
@@ -753,6 +979,19 @@
         travelCopy: "Ryanair operates the Kraków–Gothenburg route. Please check the airline directly for the flight dates and times that best fit your stay.",
         checkFlights: "Check Ryanair flights ↗",
         travelNote: "Flight schedules can change, so confirm your itinerary before making non-refundable arrangements.",
+        rsvpScript: "Kindly reply",
+        rsvpTitle: "Will you celebrate with us?",
+        rsvpCopy: "To help us with the final arrangements, please let us know whether you will be able to join us.",
+        rsvpDeadlineLabel: "Please RSVP by",
+        rsvpDeadlineDate: "31 October 2026",
+        rsvpButton: "Send your RSVP",
+        rsvpButtonShort: "RSVP",
+        rsvpNote: "The email opens to both of us. Please tell us who is attending and include any dietary requirements or helpful notes.",
+        contactLabel: "Contact / RSVP",
+        emailBody: "Hello Marek & Theres,\n\nRSVP: [We will attend / We are unable to attend]\nGuest name(s):\nDietary requirements / notes:\n\nWith love,",
+        musicLoading: "Loading Christmas music",
+        musicMute: "Mute Christmas music",
+        musicPlay: "Play Christmas music",
         closingScript: "With love",
         closingCopy: "Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together."
       },
@@ -761,9 +1000,11 @@
         navDay: "Dagen",
         navStay: "Boende",
         navTravel: "Resa",
-        heroKicker: "Tillsammans med våra familjer",
+        navRsvp: "OSA",
+        heroKicker: "Familjen Spányik & familjen Saad",
+        heroRequest: "bjuder med glädje in er att bevittna och fira vigseln mellan",
         heroDate: "12 december 2026",
-        heroCopy: "Med stor tacksamhet bjuder vi in er att dela denna vinterdag med oss när vi firar vårt bröllop, omgivna av de människor vi tycker allra mest om.",
+        heroCopy: "Med stor tacksamhet ser vi fram emot att dela denna vinterdag med er, omgivna av de människor vi håller allra kärast.",
         viewDay: "Se dagens program",
         addCalendar: "Lägg till i kalendern",
         dayScript: "Vår bröllopsdag",
@@ -799,6 +1040,19 @@
         travelCopy: "Ryanair trafikerar sträckan Kraków–Göteborg. Kontrollera aktuella flygdatum och tider direkt hos flygbolaget när ni planerar resan.",
         checkFlights: "Se Ryanair-flyg ↗",
         travelNote: "Flygtider kan ändras, så bekräfta resplanen innan ni gör bokningar som inte kan återbetalas.",
+        rsvpScript: "O.S.A.",
+        rsvpTitle: "Vill ni fira med oss?",
+        rsvpCopy: "För att hjälpa oss med de sista förberedelserna ber vi er att meddela om ni kan vara med och fira.",
+        rsvpDeadlineLabel: "Vänligen svara senast",
+        rsvpDeadlineDate: "31 oktober 2026",
+        rsvpButton: "Skicka ert svar",
+        rsvpButtonShort: "O.S.A.",
+        rsvpNote: "E-postmeddelandet går till oss båda. Skriv gärna vilka som kommer och ange eventuella kostönskemål eller andra viktiga upplysningar.",
+        contactLabel: "Kontakt / O.S.A.",
+        emailBody: "Hej Marek & Theres,\n\nO.S.A.: [Vi kommer / Vi kan tyvärr inte komma]\nNamn på gäster:\nKostönskemål / meddelande:\n\nVarma hälsningar,",
+        musicLoading: "Laddar julmusik",
+        musicMute: "Stäng av julmusiken",
+        musicPlay: "Spela julmusik",
         closingScript: "Med kärlek",
         closingCopy: "Tack för att ni är en del av våra liv. Det betyder oerhört mycket för oss att få ha er med när vi börjar detta nya kapitel tillsammans."
       },
@@ -807,9 +1061,11 @@
         navDay: "Program",
         navStay: "Ubytování",
         navTravel: "Cesta",
-        heroKicker: "Společně s našimi rodinami",
+        navRsvp: "RSVP",
+        heroKicker: "Rodiny Spányik a Saad",
+        heroRequest: "vás s radostí zvou, abyste byli svědky a oslavili sňatek",
         heroDate: "12. prosince 2026",
-        heroCopy: "S radostí a vděčností vás zveme, abyste s námi prožili tento zimní den a oslavili naši svatbu mezi lidmi, které máme nejraději.",
+        heroCopy: "S vděčností se těšíme, že tento zimní den prožijeme společně s vámi, obklopeni lidmi, které máme nejraději.",
         viewDay: "Zobrazit program",
         addCalendar: "Přidat do kalendáře",
         dayScript: "Náš svatební den",
@@ -845,6 +1101,19 @@
         travelCopy: "Ryanair provozuje spojení Krakov–Göteborg. Při plánování cesty si prosím ověřte aktuální termíny a časy letů přímo u letecké společnosti.",
         checkFlights: "Zkontrolovat lety Ryanair ↗",
         travelNote: "Letové řády se mohou měnit, proto si před nákupem nevratných služeb potvrďte celý itinerář.",
+        rsvpScript: "Prosíme o odpověď",
+        rsvpTitle: "Oslavíte tento den s námi?",
+        rsvpCopy: "Abychom mohli dokončit všechny přípravy, dejte nám prosím vědět, zda se svatby zúčastníte.",
+        rsvpDeadlineLabel: "Prosíme o odpověď do",
+        rsvpDeadlineDate: "31. října 2026",
+        rsvpButton: "Odeslat RSVP",
+        rsvpButtonShort: "RSVP",
+        rsvpNote: "E-mail se odešle nám oběma. Uveďte prosím jména hostů a případná dietní omezení nebo jiné důležité poznámky.",
+        contactLabel: "Kontakt / RSVP",
+        emailBody: "Ahoj Marku a Theres,\n\nRSVP: [Přijdeme / Bohužel se nemůžeme zúčastnit]\nJména hostů:\nDietní omezení / poznámka:\n\nS pozdravem,",
+        musicLoading: "Načítá se vánoční hudba",
+        musicMute: "Ztlumit vánoční hudbu",
+        musicPlay: "Přehrát vánoční hudbu",
         closingScript: "S láskou",
         closingCopy: "Děkujeme, že jste součástí našich životů. Moc pro nás znamená, že budete s námi, když společně otevřeme tuto novou kapitolu."
       }
@@ -852,20 +1121,43 @@
 
     const languageButtons = document.querySelectorAll('[data-lang]');
     const translatableElements = document.querySelectorAll('[data-i18n]');
+    const rsvpEmailLinks = document.querySelectorAll('[data-rsvp-email]');
+    const musicToggle = document.getElementById('musicToggle');
+    let currentLanguage = 'en';
+
+    function updateRsvpEmailLinks(dictionary) {
+      const recipients = 'marek.spanyik@vsb.cz,theressaa.ts@gmail.com';
+      const subject = 'RSVP Marek and Theres Wedding';
+      const href = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(dictionary.emailBody || translations.en.emailBody)}`;
+      rsvpEmailLinks.forEach((link) => { link.href = href; });
+    }
+
+    function updateMusicAccessibility(dictionary) {
+      if (!musicToggle) return;
+      const isLoading = musicToggle.classList.contains('is-loading');
+      const isMuted = musicToggle.classList.contains('is-muted');
+      const label = isLoading ? dictionary.musicLoading : (isMuted ? dictionary.musicPlay : dictionary.musicMute);
+      musicToggle.setAttribute('aria-label', label);
+      musicToggle.dataset.tooltip = label;
+      musicToggle.setAttribute('aria-pressed', String(!isMuted && !isLoading));
+    }
 
     function setLanguage(lang) {
       const dictionary = translations[lang] || translations.en;
-      document.documentElement.lang = lang;
+      currentLanguage = translations[lang] ? lang : 'en';
+      document.documentElement.lang = currentLanguage;
       translatableElements.forEach((element) => {
         const key = element.dataset.i18n;
         if (dictionary[key]) element.textContent = dictionary[key];
       });
       languageButtons.forEach((button) => {
-        const isActive = button.dataset.lang === lang;
+        const isActive = button.dataset.lang === currentLanguage;
         button.classList.toggle('active', isActive);
         button.setAttribute('aria-pressed', String(isActive));
       });
-      try { localStorage.setItem('wedding-language', lang); } catch (error) { /* file:// privacy mode fallback */ }
+      updateRsvpEmailLinks(dictionary);
+      updateMusicAccessibility(dictionary);
+      try { localStorage.setItem('wedding-language', currentLanguage); } catch (error) { /* file:// privacy mode fallback */ }
     }
 
     languageButtons.forEach((button) => {
@@ -937,7 +1229,7 @@
       'DTEND;TZID=Europe/Stockholm:20261213T010000',
       'SUMMARY:Marek & Theres — Wedding',
       'LOCATION:Katolska kyrkan i Trollhättan / Folkets Park, Trollhättan, Sweden',
-      'DESCRIPTION:Wedding day in Trollhättan.\\n17:30 — Ceremony: Katolska kyrkan i Trollhättan, Kungsgatan 44, 461 34 Trollhättan.\\n19:00–01:00 — Evening celebration: Folkets Park, Kungsportsvägen 1, 461 39 Trollhättan.\\nAccommodation: Scandic Swania, Storgatan 47–49. Booking code: BMAR101226.',
+      'DESCRIPTION:Wedding day in Trollhättan.\\n17:30 — Ceremony: Katolska kyrkan i Trollhättan, Kungsgatan 44, 461 34 Trollhättan.\\n19:00–01:00 — Evening celebration: Folkets Park, Kungsportsvägen 1, 461 39 Trollhättan.\\nAccommodation: Scandic Swania, Storgatan 47–49. Booking code: BMAR101226.\\nRSVP by 31 October 2026: marek.spanyik@vsb.cz and theressaa.ts@gmail.com.',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR'
@@ -957,6 +1249,105 @@
 
     document.getElementById('calendarButton').addEventListener('click', downloadCalendar);
     document.getElementById('calendarButtonBottom').addEventListener('click', downloadCalendar);
+
+    // Christmas jazz ambience. Browsers often block unmuted autoplay on a first visit,
+    // so the page attempts audible autoplay first and falls back to muted autoplay.
+    // The floating button always lets the guest mute or enable the music with one tap.
+    let musicPlayer = null;
+    let musicReady = false;
+    let musicRequestedAudible = true;
+    const christmasVideoId = 'fj0WVcj93to';
+    const christmasStartSeconds = 936; // Instrumental jazz section in the selected no-copyright mix.
+
+    function setMusicButtonState({ loading = false, muted = false } = {}) {
+      musicToggle.classList.toggle('is-loading', loading);
+      musicToggle.classList.toggle('is-muted', muted);
+      updateMusicAccessibility(translations[currentLanguage] || translations.en);
+    }
+
+    function startMusicAudible() {
+      if (!musicReady || !musicPlayer) return;
+      musicRequestedAudible = true;
+      musicPlayer.setVolume(22);
+      musicPlayer.unMute();
+      musicPlayer.playVideo();
+      setMusicButtonState({ muted: false });
+    }
+
+    function startMusicMuted() {
+      if (!musicReady || !musicPlayer) return;
+      musicRequestedAudible = false;
+      musicPlayer.mute();
+      musicPlayer.playVideo();
+      setMusicButtonState({ muted: true });
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (!musicReady || !musicPlayer) {
+        musicRequestedAudible = true;
+        return;
+      }
+      if (musicPlayer.isMuted()) {
+        startMusicAudible();
+      } else {
+        startMusicMuted();
+      }
+    });
+
+    window.onYouTubeIframeAPIReady = function () {
+      musicPlayer = new YT.Player('youtubeMusic', {
+        width: '2',
+        height: '2',
+        videoId: christmasVideoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          start: christmasStartSeconds
+        },
+        events: {
+          onReady(event) {
+            musicReady = true;
+            event.target.setVolume(22);
+            event.target.unMute();
+            event.target.playVideo();
+            setMusicButtonState({ loading: true, muted: false });
+
+            window.setTimeout(() => {
+              const playing = event.target.getPlayerState() === YT.PlayerState.PLAYING;
+              const muted = event.target.isMuted();
+              if (!playing || muted) {
+                // Reliable fallback for browser autoplay policies.
+                event.target.mute();
+                event.target.playVideo();
+                setMusicButtonState({ muted: true });
+              } else {
+                setMusicButtonState({ muted: false });
+              }
+            }, 1200);
+          },
+          onStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              musicPlayer.seekTo(christmasStartSeconds, true);
+              musicPlayer.playVideo();
+            }
+          },
+          onError() {
+            setMusicButtonState({ muted: true });
+          }
+        }
+      });
+    };
+
+    const youtubeApiScript = document.createElement('script');
+    youtubeApiScript.src = 'https://www.youtube.com/iframe_api';
+    youtubeApiScript.async = true;
+    document.head.appendChild(youtubeApiScript);
+
   </script>
 </body>
 </html>
