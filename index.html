@@ -156,6 +156,9 @@
       color: inherit;
       cursor: pointer;
       perspective: 800px;
+      -webkit-perspective: 800px;
+      transform-style: preserve-3d;
+      isolation: isolate;
       touch-action: manipulation;
       filter: drop-shadow(0 28px 36px rgba(18,2,7,.33));
       -webkit-tap-highlight-color: transparent;
@@ -184,7 +187,11 @@
         inset 0 0 42px rgba(89,42,31,.08);
       perspective: 800px;
       transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
       transition: transform .8s cubic-bezier(.22,.72,.25,1), filter .8s ease;
+      will-change: transform;
     }
 
     /* Back diagonal visible inside the opened envelope. */
@@ -208,7 +215,7 @@
 
     /* Front pocket: same ivory/gold V8 styling, but kept as a single flap layer like the reference. */
     .envelope .flap.front {
-      z-index: 3;
+      z-index: 5;
       overflow: hidden;
       border-radius: 8px;
     }
@@ -224,7 +231,7 @@
 
     .envelope .flap.front::before {
       clip-path: polygon(0 0, 50% 53%, 100% 0, 100% 100%, 0 100%);
-      opacity: .52;
+      opacity: 1;
     }
 
     .envelope .flap.front::after {
@@ -234,7 +241,7 @@
 
     /* Top flap uses the same transform-origin and 180deg flip as the supplied animation. */
     .envelope .flap.top {
-      z-index: 3;
+      z-index: 6;
       height: 57%;
       bottom: auto;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -256,7 +263,8 @@
     /* Letter uses the reference's 8% -> -120% -> 8% top movement. */
     .envelope .letter {
       position: absolute;
-      z-index: 1;
+      z-index: 2;
+      opacity: 0;
       width: 94%;
       height: 84%;
       top: 8%;
@@ -276,7 +284,7 @@
       animation-name: remove;
       animation-duration: 2s;
       animation-delay: 1.5s;
-      animation-fill-mode: forwards;
+      animation-fill-mode: both;
     }
 
     /* These two paper faces intentionally behave like .letter:before/.letter:after in the reference. */
@@ -328,7 +336,16 @@
       place-items: center;
       align-content: center;
       gap: 8px;
+      opacity: 0;
+      transform: translateY(3px);
       pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    /* Keep the printed invitation hidden while the folded sheet is coming out.
+       It only appears once both paper folds have finished opening. */
+    .envelope.open .letter-content {
+      animation: reveal-letter-content .48s ease 6s forwards;
     }
 
     .letter-monogram {
@@ -441,13 +458,36 @@
     }
 
     @keyframes remove {
+      0% {
+        top: 8%;
+        z-index: 2;
+        opacity: 0;
+      }
+      6% {
+        opacity: 1;
+      }
       50% {
         top: -120%;
+        z-index: 2;
+        opacity: 1;
+      }
+      /* At the apex the letter clears the pocket. Move it to the foreground
+         before it starts descending so there is no late z-index blink. */
+      50.1% {
+        top: -120%;
+        z-index: 7;
+        opacity: 1;
       }
       100% {
         top: 8%;
-        z-index: 3;
+        z-index: 7;
+        opacity: 1;
       }
+    }
+
+    @keyframes reveal-letter-content {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fold-up {
@@ -1241,8 +1281,10 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
+      .reveal { opacity: 1; transform: none; transition: none !important; }
+      /* Keep the explicit invitation-opening animation intact on desktop and mobile.
+         This prevents an OS-level reduced-motion preference from collapsing the whole
+         six-second sequence into a single flash. */
     }
   </style>
 </head>
@@ -1946,12 +1988,11 @@
       invitationGate.classList.add('is-opening');
       if (openingEnvelope) openingEnvelope.classList.add('open');
 
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      // Exact reference timing:
+      // Exact reference timing on every viewport, including desktop:
       // 0-1s flap flip; 1.5-3.5s letter rises and returns;
       // 4-5s upper fold; 5-6s lower fold. Only then reveal the page.
-      const revealDelay = reducedMotion ? 80 : 6150;
-      const removeDelay = reducedMotion ? 180 : 8450;
+      const revealDelay = 6600;
+      const removeDelay = 8900;
 
       window.setTimeout(() => {
         document.body.classList.remove('invitation-locked');
