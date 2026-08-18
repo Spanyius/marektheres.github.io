@@ -72,18 +72,20 @@
     body.has-invitation-gate .site-header,
     body.has-invitation-gate main,
     body.has-invitation-gate .footer,
-    body.has-invitation-gate .music-toggle {
+    body.has-invitation-gate .music-toggle,
+    body.has-invitation-gate .rsvp-float {
       transition:
-        opacity 2.05s cubic-bezier(.16,1,.3,1) .12s,
-        transform 2.15s cubic-bezier(.16,1,.3,1) .12s,
-        filter 1.9s ease .12s;
+        opacity 8.2s cubic-bezier(.16,1,.3,1) .12s,
+        transform 8.4s cubic-bezier(.16,1,.3,1) .12s,
+        filter 7.6s ease .12s;
       will-change: opacity, transform, filter;
     }
 
     body.has-invitation-gate.invitation-locked .site-header,
     body.has-invitation-gate.invitation-locked main,
     body.has-invitation-gate.invitation-locked .footer,
-    body.has-invitation-gate.invitation-locked .music-toggle {
+    body.has-invitation-gate.invitation-locked .music-toggle,
+    body.has-invitation-gate.invitation-locked .rsvp-float {
       opacity: 0;
       transform: translateY(10px) scale(.988);
       filter: blur(3px);
@@ -105,7 +107,7 @@
         radial-gradient(circle at 14% 18%, rgba(213,194,151,.08) 0 1px, transparent 1.7px) 0 0 / 30px 30px,
         radial-gradient(circle at 82% 72%, rgba(255,255,255,.045) 0 1px, transparent 1.6px) 0 0 / 38px 38px,
         linear-gradient(145deg, var(--burgundy-950), var(--burgundy-800) 48%, var(--burgundy-950));
-      transition: opacity 2.05s cubic-bezier(.22,.61,.36,1), filter 2.05s ease;
+      transition: opacity 8.2s cubic-bezier(.22,.61,.36,1), filter 8.2s ease;
       will-change: opacity, filter;
     }
 
@@ -176,15 +178,18 @@
       inset: 0;
       display: block;
       overflow: visible;
-      border: 1px solid rgba(184,154,98,.60);
-      border-radius: 8px;
+      border: 1px solid rgba(184,154,98,.52);
+      border-radius: 18px;
       background:
-        linear-gradient(rgba(255,250,241,.96), rgba(246,235,217,.96)),
-        repeating-linear-gradient(0deg, rgba(70,30,22,.025) 0 1px, transparent 1px 4px);
+        radial-gradient(circle at 18% 24%, rgba(86,54,37,.035) 0 .75px, transparent .95px) 0 0 / 8px 8px,
+        radial-gradient(circle at 74% 68%, rgba(255,255,255,.46) 0 .8px, transparent 1px) 0 0 / 11px 11px,
+        repeating-linear-gradient(8deg, rgba(106,76,47,.018) 0 1px, transparent 1px 6px),
+        linear-gradient(145deg, #fffaf1 0%, #f6ead8 55%, #ecdbc3 100%);
       box-shadow:
-        0 0 1px rgba(0,0,0,.18),
-        0 2px 8px rgba(35,5,12,.15),
-        inset 0 0 42px rgba(89,42,31,.08);
+        0 1px 2px rgba(0,0,0,.12),
+        0 12px 28px rgba(35,5,12,.14),
+        inset 0 0 48px rgba(89,42,31,.055),
+        inset 0 1px 0 rgba(255,255,255,.75);
       perspective: 800px;
       transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
@@ -217,7 +222,7 @@
     .envelope .flap.front {
       z-index: 5;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 18px;
     }
 
     .envelope .flap.front::before,
@@ -225,8 +230,11 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(145deg, #f8eddd, #ead8bf);
-      filter: drop-shadow(0 -1px 0 rgba(184,154,98,.18));
+      background:
+        radial-gradient(circle at 22% 30%, rgba(90,55,37,.035) 0 .7px, transparent .9px) 0 0 / 9px 9px,
+        repeating-linear-gradient(7deg, rgba(106,76,47,.018) 0 1px, transparent 1px 6px),
+        linear-gradient(145deg, #fff6e8, #ead8bf);
+      filter: drop-shadow(0 -1px 0 rgba(184,154,98,.16));
     }
 
     .envelope .flap.front::before {
@@ -242,11 +250,21 @@
     /* Top flap uses the same transform-origin and 180deg flip as the supplied animation. */
     .envelope .flap.top {
       z-index: 6;
-      height: 57%;
+      top: -1px;
+      left: -1px;
+      right: -1px;
       bottom: auto;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background: linear-gradient(165deg, #fff6e9 0%, #ead7bd 100%);
-      filter: drop-shadow(0 1px 0 rgba(184,154,98,.36));
+      width: calc(100% + 2px);
+      height: 58%;
+      border-radius: 19px 19px 10px 10px;
+      /* A tiny softened tip avoids the unnaturally sharp triangular point. */
+      clip-path: polygon(0 0, 100% 0, 53% 94%, 51.5% 97.5%, 48.5% 97.5%, 47% 94%);
+      background:
+        radial-gradient(circle at 28% 26%, rgba(89,54,37,.035) 0 .7px, transparent .9px) 0 0 / 9px 9px,
+        repeating-linear-gradient(8deg, rgba(106,76,47,.018) 0 1px, transparent 1px 6px),
+        linear-gradient(165deg, #fff8ec 0%, #ead7bd 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.68);
+      filter: drop-shadow(0 1px 0 rgba(184,154,98,.30));
       transform-origin: 50% 0;
       -webkit-transform-origin: 50% 0;
       transform: rotateX(0deg);
@@ -362,50 +380,10 @@
       text-transform: uppercase;
     }
 
-    .wax-seal {
-      position: absolute;
-      z-index: 9;
-      left: 50%;
-      top: 51%;
-      width: clamp(76px, 15vw, 92px);
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      color: #ead9b7;
-      transform: translate(-50%, -50%) rotate(-4deg);
-      transition: transform .62s cubic-bezier(.22,.72,.25,1), opacity .55s ease, filter .62s ease;
-      filter: drop-shadow(0 7px 8px rgba(55,6,18,.30));
-    }
-
-    .wax-seal::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      clip-path: polygon(50% 0,62% 7%,76% 4%,87% 15%,96% 28%,93% 43%,100% 55%,91% 69%,88% 84%,72% 89%,62% 100%,48% 94%,35% 100%,24% 91%,9% 86%,8% 69%,0 56%,7% 43%,3% 29%,15% 19%,24% 7%,38% 9%);
-      background:
-        radial-gradient(circle at 34% 28%, rgba(255,255,255,.14), transparent 24%),
-        radial-gradient(circle at 60% 64%, #7d2033 0 18%, #651727 56%, #4c0f1d 100%);
-      box-shadow: inset 0 0 0 1px rgba(255,223,185,.16), inset 0 -6px 12px rgba(41,3,12,.22);
-    }
-
-    .wax-seal::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border: 1px solid rgba(234,217,183,.52);
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 3px rgba(58,8,18,.16);
-    }
-
-    .wax-seal span {
-      position: relative;
-      z-index: 1;
-      margin-top: -2px;
-      font-family: var(--script);
-      font-size: clamp(23px, 5vw, 31px);
-      line-height: 1;
-      text-shadow: 0 1px 1px rgba(48,9,18,.55);
-    }
+    .wax-seal { position: absolute; z-index: 9; left: 50%; top: 51%; width: clamp(78px, 14vw, 94px); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; color: #ead9b7; transform: translate(-50%, -50%) rotate(-2deg); transition: transform .62s cubic-bezier(.22,.72,.25,1), opacity .55s ease, filter .62s ease; filter: drop-shadow(0 8px 9px rgba(55,6,18,.30)); }
+    .wax-seal::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 31% 27%, rgba(255,255,255,.17) 0 1.5%, transparent 11%), radial-gradient(circle at 69% 73%, rgba(42,2,12,.13) 0 1.2%, transparent 9%), radial-gradient(circle at 24% 70%, rgba(255,224,190,.09) 0 1%, transparent 8%), repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.018) 0 1px, rgba(48,5,16,.022) 1.5px 3px, transparent 3.5px 5px), radial-gradient(circle at 42% 35%, #88253a 0 16%, #6c1729 51%, #4d0e1c 100%); box-shadow: inset 0 0 0 1px rgba(255,224,190,.22), inset 0 -8px 14px rgba(41,3,12,.25), inset 5px 5px 10px rgba(255,255,255,.055); }
+    .wax-seal::after { content: ""; position: absolute; inset: 13%; border: 1px solid rgba(234,217,183,.64); border-radius: 50%; box-shadow: 0 0 0 3px rgba(58,8,18,.17), 0 0 0 5px rgba(234,217,183,.10), inset 0 0 0 1px rgba(234,217,183,.26); }
+    .wax-seal span { position: relative; z-index: 1; width: 100%; height: 100%; display: grid; place-items: center; padding: 18%; font-family: var(--script); font-size: clamp(23px, 4.5vw, 30px); line-height: .92; letter-spacing: -.035em; text-align: center; transform: translateY(1px); text-shadow: 0 1px 1px rgba(48,9,18,.58); }
 
     .gate-open-label {
       margin: clamp(22px, 4vh, 34px) 0 2px;
@@ -530,7 +508,6 @@
     html[dir="rtl"] .booking-code,
     html[dir="rtl"] .travel-card h3,
     html[dir="rtl"] .footer-contact a,
-    html[dir="rtl"] .closing-rsvp-phone a { direction: ltr; }
     html[dir="rtl"] .language-switcher { direction: ltr; }
     html[dir="rtl"] .nav-links a,
     html[dir="rtl"] .button,
@@ -540,7 +517,6 @@
     html[dir="rtl"] .gate-open-label { letter-spacing: 0; }
     html[dir="rtl"] .details-list li { padding-left: 0; padding-right: 50px; text-align: right; }
     html[dir="rtl"] .details-list li::before { left: auto; right: 0; }
-    html[dir="rtl"] .closing-rsvp-phone { direction: rtl; }
 
     .site-header {
       position: sticky;
@@ -572,20 +548,7 @@
       white-space: nowrap;
     }
 
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      border: 1px solid var(--gold-soft);
-      border-radius: 50%;
-      font-family: var(--script);
-      font-size: 16px;
-      letter-spacing: -.04em;
-      line-height: 1;
-    }
+    .brand-mark { width: 46px; height: 46px; flex: 0 0 46px; display: grid; place-items: center; overflow: hidden; padding: 8px 7px 6px; border: 1px solid var(--gold-soft); border-radius: 50%; font-family: var(--script); font-size: 16px; letter-spacing: -.035em; line-height: 1; text-align: center; }
 
     .brand-text {
       margin-left: 2px;
@@ -726,8 +689,8 @@
     }
 
     .hero-date {
-      margin: 38px 0 0;
-      font-size: clamp(22px, 4vw, 34px);
+      margin: 38px 0 0; color: var(--burgundy-800);
+      font-size: clamp(22px, 4vw, 34px); font-weight: 600;
       letter-spacing: .16em;
       text-transform: uppercase;
     }
@@ -757,6 +720,7 @@
       flex-wrap: wrap;
       gap: 12px;
     }
+    .hero-actions-spaced { margin-top: clamp(72px, 7vw, 92px); }
 
     .button {
       min-height: 46px;
@@ -804,6 +768,7 @@
       text-shadow: .22px 0 currentColor, -.22px 0 currentColor;
     }
     .section-burgundy .section-heading .script { color: var(--gold-soft); }
+    #stay .section-heading .script { margin-bottom: 14px; }
     .section-heading h2 {
       margin: 0;
       font-size: clamp(31px, 5vw, 50px);
@@ -861,6 +826,10 @@
       letter-spacing: .16em;
       text-transform: uppercase;
     }
+
+    .event-schedule { margin: 0 0 22px; display: grid; gap: 7px; }
+    .event-schedule p { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 18px; color: #63484d; font-size: 14px; font-weight: 600; letter-spacing: .035em; }
+    .event-schedule strong { color: var(--burgundy-700); font-size: 15px; font-weight: 750; letter-spacing: .08em; white-space: nowrap; }
     .event-card h3 {
       margin: 0 0 14px;
       font-size: clamp(25px, 3.4vw, 36px);
@@ -902,6 +871,11 @@
       font-weight: 600;
     }
     .stay-highlight .hotel-address { color: rgba(251,247,238,.80); font-size: 15.5px; font-weight: 550; }
+    .hotel-rate { margin: 24px 0 4px; padding: 16px 17px 14px; border-top: 1px solid rgba(213,194,151,.28); border-bottom: 1px solid rgba(213,194,151,.28); }
+    .hotel-rate > div { display: flex; justify-content: space-between; gap: 16px; color: rgba(251,247,238,.88); font-size: 14.5px; font-weight: 575; }
+    .hotel-rate > div + div { margin-top: 5px; }
+    .hotel-rate strong { color: var(--ivory); font-weight: 700; white-space: nowrap; }
+    .hotel-rate p { margin: 9px 0 0; color: var(--gold-soft); font-size: 12.5px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
     .booking-code {
       margin: 30px 0 20px;
       padding: 18px;
@@ -1061,54 +1035,23 @@
     .closing .button.button-outline:hover { color: var(--burgundy-800); background: var(--ivory); }
 
     .closing-actions {
+      margin-top: 40px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
     }
 
-    .closing-rsvp {
-      width: min(700px, 100%);
-      margin: 32px auto 28px;
-      padding: 25px 18px 23px;
-      border-top: 1px solid rgba(213,194,151,.48);
-      border-bottom: 1px solid rgba(213,194,151,.48);
-    }
-    .closing-rsvp-copy {
-      width: min(630px, 100%);
-      margin: 0 auto;
-      color: rgba(251,247,238,.94);
-      font-size: 17px;
-      font-weight: 575;
-      line-height: 1.65;
-    }
-    .closing-rsvp-deadline {
-      margin: 17px auto 13px !important;
-      color: var(--gold-soft) !important;
-      font-size: 13px !important;
-      font-weight: 700 !important;
-      letter-spacing: .12em;
-      line-height: 1.4 !important;
-      text-transform: uppercase;
-    }
-    .closing-rsvp-deadline strong {
-      display: inline-block;
-      margin-left: 9px;
-      color: var(--ivory);
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: .025em;
-      text-transform: none;
-    }
-    .closing-rsvp-note {
-      width: min(620px, 100%);
-      margin: 0 auto !important;
-      color: rgba(251,247,238,.82) !important;
-      font-size: 14.5px !important;
-      font-weight: 550 !important;
-      line-height: 1.6 !important;
-      font-style: italic;
-    }
+    .closing-rsvp { width: min(760px, 100%); margin: 0 auto 54px; padding: 0 18px 34px; border-bottom: 1px solid rgba(213,194,151,.48); }
+    .rsvp-kicker { display: block; margin-bottom: 6px; color: var(--gold-soft); font-family: var(--script); font-size: clamp(52px, 8vw, 78px); line-height: .95; text-shadow: .22px 0 currentColor, -.22px 0 currentColor; }
+    .rsvp-title { margin: 0 0 18px; color: var(--ivory); font-size: clamp(27px, 4vw, 42px); font-weight: 600; line-height: 1.15; }
+    .closing-rsvp-copy { width: min(630px, 100%); margin: 0 auto; color: rgba(251,247,238,.94); font-size: 17px; font-weight: 575; line-height: 1.65; }
+    .closing-rsvp-deadline { margin: 18px auto 0 !important; color: var(--gold-soft) !important; font-size: 13px !important; font-weight: 700 !important; letter-spacing: .12em; line-height: 1.4 !important; text-transform: uppercase; }
+    .closing-rsvp-deadline strong { display: inline-block; margin-left: 9px; color: var(--ivory); font-size: 17px; font-weight: 700; letter-spacing: .025em; text-transform: none; }
+    .rsvp-survey-slot { width: min(760px, 100%); min-height: 620px; margin: 24px auto 0; overflow: hidden; border-radius: 14px; background: var(--ivory); }
+    .rsvp-survey-slot > [data-tf-live] { width: 100%; min-height: 620px; }
+    .rsvp-survey-slot iframe { width: 100%; min-height: 620px; display: block; border: 0; border-radius: 14px; background: var(--ivory); }
+    .closing-love { margin-top: 18px; }
 
     .footer-contact {
       margin-top: 10px;
@@ -1124,6 +1067,9 @@
     }
     .footer-contact a:hover,
     .footer-contact a:focus-visible { color: var(--ivory); }
+
+    .rsvp-float { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 70px); z-index: 1400; width: 58px; height: 58px; display: grid; place-items: center; border: 1px solid rgba(213,194,151,.72); border-radius: 50%; background: var(--ivory); color: var(--burgundy-800); box-shadow: 0 10px 30px rgba(35,5,12,.22); text-decoration: none; font-size: 10px; font-weight: 800; letter-spacing: .08em; line-height: 1; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; backdrop-filter: blur(10px); }
+    .rsvp-float:hover, .rsvp-float:focus-visible { transform: translateY(-2px) scale(1.03); background: var(--gold-soft); box-shadow: 0 13px 34px rgba(35,5,12,.30); outline: none; }
 
     .music-player {
       position: fixed;
@@ -1277,6 +1223,7 @@
       .travel-card { grid-template-columns: 1fr; }
       .travel-icon { width: 62px; height: 62px; }
       .music-toggle { width: 54px; height: 54px; right: 16px; bottom: 16px; }
+      .rsvp-float { width: 54px; height: 54px; right: 16px; bottom: 82px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1312,7 +1259,7 @@
   <noscript><style>
     .invitation-gate { display: none !important; }
     body { overflow: auto !important; }
-    .site-header, main, .footer, .music-toggle { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+    .site-header, main, .footer, .music-toggle, .rsvp-float { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
   </style></noscript>
 
   <header class="site-header">
@@ -1348,12 +1295,11 @@
       <article class="invitation-card reveal">
         <p class="hero-kicker" data-i18n="heroKicker">The Spányik family &amp; the Saad family</p>
         <div class="ornament" aria-hidden="true">✦</div>
-        <p class="invitation-request" data-i18n="heroRequest">joyfully invite you to witness and celebrate the marriage of</p>
+        <p class="invitation-request" data-i18n="heroRequest">With God’s blessing and the love of family and friends, we cordially invite you to share our joy and attend the holy matrimony of</p>
         <h1 class="couple-name">Marek &amp; Theres</h1>
         <p class="hero-date" data-i18n="heroDate">12 December 2026</p>
         <p class="hero-place">Trollhättan · Sweden</p>
-        <p class="hero-copy" data-i18n="heroCopy">With grateful hearts, we would be honoured to share this winter day with you, surrounded by the people we love most.</p>
-        <div class="hero-actions">
+        <div class="hero-actions hero-actions-spaced">
           <a class="button" href="#day" data-i18n="viewDay">View the day</a>
           <button class="button button-outline" type="button" id="calendarButton" data-i18n="addCalendar">Add to calendar</button>
         </div>
@@ -1364,23 +1310,26 @@
       <div class="section-inner">
         <div class="section-heading reveal">
           <span class="script" data-i18n="dayScript">Our wedding day</span>
-          <h2 data-i18n="dayTitle">Two places, one celebration</h2>
-          <p data-i18n="dayIntro">We would be truly grateful to celebrate with you. The ceremony begins in Trollhättan, followed by dinner, drinks and dancing at Folkets Park.</p>
+          <p data-i18n="dayIntro">We would be truly grateful to celebrate with you. The ceremony begins in St. Petri Catholic Church, followed by dinner, drinks and dancing at Folkets Park in Trollhättan, Sweden — where we hope the glasses stay full, the music stays loud, and the dance floor stays busy all night long.</p>
         </div>
 
         <div class="timeline">
           <article class="event-card reveal">
-            <div class="event-number">01</div>
-            <p class="event-time">17:30</p>
+            <div class="event-schedule">
+              <p><span data-i18n="arrivalBy">Please arrive by</span><strong>17:00</strong></p>
+              <p><span data-i18n="ceremonyBegins">Ceremony begins</span><strong>17:30</strong></p>
+            </div>
             <h3 data-i18n="churchTitle">Wedding ceremony</h3>
-            <p><strong>Katolska kyrkan i Trollhättan</strong></p>
+            <p><strong>St. Petri Catholic Church</strong></p>
             <p class="address">Kungsgatan 44<br>461 34 Trollhättan</p>
             <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Katolska+kyrkan+i+Trollhattan+Kungsgatan+44+461+34+Trollhattan" target="_blank" rel="noopener" data-i18n="openMap">Open map ↗</a>
           </article>
 
           <article class="event-card reveal">
-            <div class="event-number">02</div>
-            <p class="event-time">19:00 — 01:00</p>
+            <div class="event-schedule">
+              <p><span data-i18n="arrivalBy">Please arrive by</span><strong>18:00</strong></p>
+              <p><span data-i18n="celebrationBegins">Celebration</span><strong>19:00 — 01:00</strong></p>
+            </div>
             <h3 data-i18n="eveningTitle">Evening celebration</h3>
             <p><strong>Folkets Park</strong></p>
             <p class="address">Kungsportsvägen 1<br>461 39 Trollhättan</p>
@@ -1395,7 +1344,7 @@
         <div class="section-heading reveal">
           <span class="script" data-i18n="stayScript">Stay nearby</span>
           <h2 data-i18n="stayTitle">Accommodation in Trollhättan</h2>
-          <p data-i18n="stayIntro">We have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.</p>
+          <p data-i18n="stayIntro">For those who would like to book a hotel, we have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.</p>
         </div>
 
         <div class="stay-grid">
@@ -1404,12 +1353,17 @@
             <h3>Scandic Swania</h3>
             <p class="hotel-address">Storgatan 47–49<br>461 30 Trollhättan</p>
 
+            <div class="hotel-rate">
+              <div><span data-i18n="singleRoomLabel">Single room</span><strong>1090 SEK</strong></div>
+              <div><span data-i18n="doubleRoomLabel">Double room</span><strong>1290 SEK</strong></div>
+              <p data-i18n="breakfastIncluded">Breakfast included</p>
+            </div>
+
             <div class="booking-code">
               <span data-i18n="bookingCode">Booking code</span>
               <strong>BMAR101226</strong>
             </div>
 
-            <!-- Please verify this date: the supplied source text says 26 November 2027, after the 12 December 2026 wedding. -->
             <p class="deadline"><span data-i18n="bookingDeadline">Last day for booking</span>: <strong data-i18n="deadlineDate">26 November 2026</strong></p>
 
             <a class="button" href="https://www.scandichotels.com" target="_blank" rel="noopener" data-i18n="bookScandic">Book at Scandic ↗</a>
@@ -1429,8 +1383,8 @@
                   <li data-i18n="stayRule4">Payment is made at check-in by credit card.</li>
                   <li data-i18n="stayRule5">Credit card information is required at the time of booking to guarantee the room.</li>
                   <li data-i18n="stayRule6">Bookings are made individually and are treated as individual reservations.</li>
-                  <li data-i18n="stayRule7">A reservation can be changed or cancelled until 18:00 on the day of arrival.</li>
-                  <li data-i18n="stayRule8">For changes or cancellations after 18:00, the hotel has the right to charge for the booking.</li>
+                  <li data-i18n="stayRule7">A reservation can be changed or cancelled until 18:00 on the day before the stay.</li>
+                  <li data-i18n="stayRule8">For changes or cancellations after 18:00 on the day before the stay, the hotel has the right to charge for the booking.</li>
                   <li data-i18n="stayRule9">Each guest receives an individual confirmation when the reservation is made.</li>
                 </ol>
               </div>
@@ -1469,19 +1423,24 @@
 
     <section class="closing" id="rsvp">
       <div class="reveal">
-        <span class="script" data-i18n="closingScript">With love</span>
-        <h2>Marek &amp; Theres</h2>
-        <p class="closing-copy" data-i18n="closingCopy">Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together.</p>
-
         <div class="closing-rsvp">
+          <span class="rsvp-kicker" data-i18n="rsvpScript">Kindly reply</span>
+          <h2 class="rsvp-title" data-i18n="rsvpTitle">Will you celebrate with us?</h2>
           <p class="closing-rsvp-copy" data-i18n="rsvpCopy">To help us with the final arrangements, please let us know whether you will be able to join us.</p>
           <p class="closing-rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Please RSVP by</span><strong data-i18n="rsvpDeadlineDate">31 October 2026</strong></p>
-          <p class="closing-rsvp-note" data-i18n="rsvpNote">When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.</p>
-	  <p class="closing-rsvp-phone"><span data-i18n="rsvpPhoneIntro">Prefer to reply by phone?</span> <a href="tel:+420606546270">Marek&nbsp; +420&nbsp;606&nbsp;546&nbsp;270</a><span aria-hidden="true"> · </span><a href="tel:+46730284940">Theres&nbsp; +46&nbsp;730&nbsp;284&nbsp;940</a></p>
+          <div class="rsvp-survey-slot" id="rsvpSurveyEmbed">
+            <div data-tf-live="01M0ADNC3Z7KDQE80KJC6SXG4P"></div>
+          </div>
+          <script src="https://embed.typeform.com/next/embed.js"></script>
+        </div>
+
+        <div class="closing-love">
+          <span class="script" data-i18n="closingScript">With love</span>
+          <h2>Marek &amp; Theres</h2>
+          <p class="closing-copy" data-i18n="closingCopy">We look forward to celebrating our big day with you.</p>
         </div>
 
         <div class="closing-actions">
-          <a class="button" id="rsvpEmailButton" data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com" data-i18n="rsvpButton">Send your RSVP</a>
           <button class="button button-outline" type="button" id="calendarButtonBottom" data-i18n="addCalendar">Add to calendar</button>
         </div>
       </div>
@@ -1490,10 +1449,15 @@
 
   <footer class="footer">
     <div>Marek &amp; Theres · 12.12.2026 · Trollhättan</div>
-    <div class="footer-contact"><span data-i18n="contactLabel">Contact / RSVP</span>: <a data-rsvp-email href="mailto:marek.spanyik@vsb.cz,theressaa.ts@gmail.com">marek.spanyik@vsb.cz · theressaa.ts@gmail.com</a></div>
+    <div class="footer-contact">
+      <span data-i18n="contactLabel">Contact</span>:
+      <a href="mailto:marek.spanyik@vsb.cz">marek.spanyik@vsb.cz</a> · <a href="tel:+420606546270">Marek +420 606 546 270</a><br>
+      <a href="mailto:theressaa.ts@gmail.com">theressaa.ts@gmail.com</a> · <a href="tel:+46730284940">Theres +46 730 284 940</a>
+    </div>
   </footer>
 
   <div class="music-player" id="youtubeMusic" aria-hidden="true"></div>
+  <a class="rsvp-float" href="#rsvp" aria-label="RSVP">RSVP</a>
   <button class="music-toggle is-loading is-muted" id="musicToggle" type="button" aria-label="Loading Christmas music" data-tooltip="Loading Christmas music">
     <span class="music-icon" aria-hidden="true">♫</span>
     <span class="music-slash" aria-hidden="true"></span>
@@ -1510,24 +1474,29 @@
         navTravel: "Travel",
         navRsvp: "RSVP",
         heroKicker: "The Spányik family & the Saad family",
-        heroRequest: "joyfully invite you to witness and celebrate the marriage of",
+        heroRequest: "With God’s blessing and the love of family and friends, we cordially invite you to share our joy and attend the holy matrimony of",
         heroDate: "12 December 2026",
-        heroCopy: "With grateful hearts, we would be honoured to share this winter day with you, surrounded by the people we love most.",
         viewDay: "View the day",
         addCalendar: "Add to calendar",
         dayScript: "Our wedding day",
         dayTitle: "Two places, one celebration",
-        dayIntro: "We would be truly grateful to celebrate with you. The ceremony begins in Trollhättan, followed by dinner, drinks and dancing at Folkets Park.",
+        dayIntro: "We would be truly grateful to celebrate with you. The ceremony begins in St. Petri Catholic Church, followed by dinner, drinks and dancing at Folkets Park in Trollhättan, Sweden — where we hope the glasses stay full, the music stays loud, and the dance floor stays busy all night long.",
+        arrivalBy: "Please arrive by",
+        ceremonyBegins: "Ceremony begins",
+        celebrationBegins: "Celebration",
         churchTitle: "Wedding ceremony",
         eveningTitle: "Evening celebration",
         openMap: "Open map ↗",
         stayScript: "Stay nearby",
         stayTitle: "Accommodation in Trollhättan",
-        stayIntro: "We have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.",
+        stayIntro: "For those who would like to book a hotel, we have arranged a pre-booked wedding rate at Scandic Swania. Rooms remain subject to availability, so early booking is recommended.",
+        singleRoomLabel: "Single room",
+        doubleRoomLabel: "Double room",
+        breakfastIncluded: "Breakfast included",
         recommendedHotel: "Recommended hotel",
         bookingCode: "Booking code",
         bookingDeadline: "Last day for booking",
-        deadlineDate: "26 November 2027",
+        deadlineDate: "26 November 2026",
         bookScandic: "Book at Scandic ↗",
         bookingStepsTitle: "How to book your room at Scandic",
         stayRule1: "Reserve via scandichotels.com or call the central reservations office on +46 8 517 517 00 and press 1.",
@@ -1536,8 +1505,8 @@
         stayRule4: "Payment is made at check-in by credit card.",
         stayRule5: "Credit card information is required at the time of booking to guarantee the room.",
         stayRule6: "Bookings are made individually and are treated as individual reservations.",
-        stayRule7: "A reservation can be changed or cancelled until 18:00 on the day of arrival.",
-        stayRule8: "For changes or cancellations after 18:00, the hotel has the right to charge for the booking.",
+        stayRule7: "A reservation can be changed or cancelled until 18:00 on the day before the stay.",
+        stayRule8: "For changes or cancellations after 18:00 on the day before the stay, the hotel has the right to charge for the booking.",
         stayRule9: "Each guest receives an individual confirmation when the reservation is made.",
         otherHotelsTitle: "Prefer another hotel?",
         otherHotelsCopy: "Browse other accommodation options in Trollhättan for the wedding night.",
@@ -1554,17 +1523,12 @@
         rsvpCopy: "To help us with the final arrangements, please let us know whether you will be able to join us.",
         rsvpDeadlineLabel: "Please RSVP by",
         rsvpDeadlineDate: "31 October 2026",
-        rsvpButton: "Send your RSVP",
-        rsvpButtonShort: "RSVP",
-        rsvpNote: "When you reply, please tell us who will attend and include any dietary requirements or other helpful notes. The email is addressed to both of us.",
-        rsvpPhoneIntro: "Prefer to reply by phone?",
-        contactLabel: "Contact / RSVP",
-        emailBody: "Hello Marek & Theres,\n\nRSVP: [We will attend / We are unable to attend]\nGuest name(s):\nDietary requirements / notes:\n\nWith love,",
+        contactLabel: "Contact",
         musicLoading: "Loading Christmas music",
         musicMute: "Mute Christmas music",
         musicPlay: "Play Christmas music",
         closingScript: "With love",
-        closingCopy: "Thank you for being part of our lives. It means the world to us to have you there as we begin this next chapter together."
+        closingCopy: "We look forward to celebrating our big day with you."
       },
       sv: {
         openInvitation: "Öppna inbjudan",
@@ -1575,24 +1539,29 @@
         navTravel: "Resa",
         navRsvp: "OSA",
         heroKicker: "Familjen Spányik & familjen Saad",
-        heroRequest: "bjuder med glädje in er att bevittna och fira vigseln mellan",
+        heroRequest: "Med Guds välsignelse och kärleken från familj och vänner bjuder vi er hjärtligt att dela vår glädje och närvara vid den heliga vigseln mellan",
         heroDate: "12 december 2026",
-        heroCopy: "Med stor tacksamhet ser vi fram emot att dela denna vinterdag med er, omgivna av de människor vi håller allra kärast.",
         viewDay: "Se dagens program",
         addCalendar: "Lägg till i kalendern",
         dayScript: "Vår bröllopsdag",
         dayTitle: "Två platser, ett firande",
-        dayIntro: "Vi skulle vara oerhört glada och tacksamma över att få fira med er. Vigseln börjar i Trollhättan och följs av middag, dryck och dans på Folkets Park.",
+        dayIntro: "Vi skulle vara oerhört glada och tacksamma över att få fira med er. Vigseln börjar i St. Petri katolska kyrka och följs av middag, dryck och dans på Folkets Park i Trollhättan, Sverige — där vi hoppas att glasen förblir fulla, musiken fortsätter spela högt och dansgolvet är fullt hela natten.",
+        arrivalBy: "Vänligen kom senast",
+        ceremonyBegins: "Vigseln börjar",
+        celebrationBegins: "Firandet",
         churchTitle: "Vigsel",
         eveningTitle: "Kvällsfirande",
         openMap: "Öppna karta ↗",
         stayScript: "Bo nära",
         stayTitle: "Boende i Trollhättan",
-        stayIntro: "Vi har ordnat ett förbokat bröllopspris på Scandic Swania. Rummen bokas i mån av tillgänglighet, så vi rekommenderar att boka i god tid.",
+        stayIntro: "För er som vill boka hotell har vi ordnat ett förbokat bröllopspris på Scandic Swania. Rummen bokas i mån av tillgänglighet, så vi rekommenderar att boka i god tid.",
+        singleRoomLabel: "Enkelrum",
+        doubleRoomLabel: "Dubbelrum",
+        breakfastIncluded: "Frukost ingår",
         recommendedHotel: "Rekommenderat hotell",
         bookingCode: "Bokningskod",
         bookingDeadline: "Sista bokningsdag",
-        deadlineDate: "26 november 2027",
+        deadlineDate: "26 november 2026",
         bookScandic: "Boka på Scandic ↗",
         bookingStepsTitle: "Så bokar ni ert rum på Scandic",
         stayRule1: "Boka via scandichotels.com eller ring Scandics centrala bokning på +46 8 517 517 00 och tryck 1.",
@@ -1601,8 +1570,8 @@
         stayRule4: "Betalning sker med kreditkort vid incheckning.",
         stayRule5: "Kreditkortsuppgifter måste lämnas vid bokningstillfället för att garantera hotellrummet.",
         stayRule6: "Varje bokning görs individuellt och behandlas som en individuell reservation.",
-        stayRule7: "Reservationen kan ändras eller avbokas fram till kl. 18.00 på ankomstdagen.",
-        stayRule8: "Vid ändring eller avbokning efter kl. 18.00 har hotellet rätt att debitera bokningen.",
+        stayRule7: "Reservationen kan ändras eller avbokas fram till kl. 18.00 dagen före vistelsen.",
+        stayRule8: "Vid ändring eller avbokning efter kl. 18.00 dagen före vistelsen har hotellet rätt att debitera bokningen.",
         stayRule9: "Varje gäst får en individuell bekräftelse i samband med bokningen.",
         otherHotelsTitle: "Föredrar ni ett annat hotell?",
         otherHotelsCopy: "Se fler boendealternativ i Trollhättan för bröllopsnatten.",
@@ -1619,17 +1588,12 @@
         rsvpCopy: "För att hjälpa oss med de sista förberedelserna ber vi er att meddela om ni kan vara med och fira.",
         rsvpDeadlineLabel: "Vänligen svara senast",
         rsvpDeadlineDate: "31 oktober 2026",
-        rsvpButton: "Skicka ert svar",
-        rsvpButtonShort: "O.S.A.",
-        rsvpNote: "När ni svarar, skriv vilka som kommer och ange eventuella kostönskemål eller andra viktiga upplysningar. E-postmeddelandet går till oss båda.",
-        rsvpPhoneIntro: "Föredrar ni att svara via telefon?",
-        contactLabel: "Kontakt / O.S.A.",
-        emailBody: "Hej Marek & Theres,\n\nO.S.A.: [Vi kommer / Vi kan tyvärr inte komma]\nNamn på gäster:\nKostönskemål / meddelande:\n\nVarma hälsningar,",
+        contactLabel: "Kontakt",
         musicLoading: "Laddar julmusik",
         musicMute: "Stäng av julmusiken",
         musicPlay: "Spela julmusik",
         closingScript: "Med kärlek",
-        closingCopy: "Tack för att ni är en del av våra liv. Det betyder oerhört mycket för oss att få ha er med när vi börjar detta nya kapitel tillsammans."
+        closingCopy: "Vi ser fram emot att fira vår stora dag tillsammans med er."
       },
       cs: {
         openInvitation: "Otevřít pozvánku",
@@ -1640,24 +1604,29 @@
         navTravel: "Cesta",
         navRsvp: "RSVP",
         heroKicker: "Rodiny Spányik a Saad",
-        heroRequest: "vás s radostí zvou, abyste byli svědky a oslavili sňatek",
+        heroRequest: "S Božím požehnáním a láskou rodiny a přátel vás srdečně zveme, abyste sdíleli naši radost a byli přítomni svátosti manželství",
         heroDate: "12. prosince 2026",
-        heroCopy: "S vděčností se těšíme, že tento zimní den prožijeme společně s vámi, obklopeni lidmi, které máme nejraději.",
         viewDay: "Zobrazit program",
         addCalendar: "Přidat do kalendáře",
         dayScript: "Náš svatební den",
         dayTitle: "Dvě místa, jedna oslava",
-        dayIntro: "Budeme velmi rádi, když tento den oslavíte s námi. Obřad začne v Trollhättanu a poté se přesuneme na večeři, přípitek a tanec do Folkets Park.",
+        dayIntro: "Budeme velmi rádi, když tento den oslavíte s námi. Obřad začne v katolickém kostele St. Petri a poté bude následovat večeře, přípitek a tanec ve Folkets Park v Trollhättanu ve Švédsku — kde doufáme, že sklenky zůstanou plné, hudba bude hrát nahlas a taneční parket bude žít celou noc.",
+        arrivalBy: "Prosíme, přijďte nejpozději",
+        ceremonyBegins: "Obřad začíná",
+        celebrationBegins: "Oslava",
         churchTitle: "Svatební obřad",
         eveningTitle: "Večerní oslava",
         openMap: "Otevřít mapu ↗",
         stayScript: "Zůstaňte poblíž",
         stayTitle: "Ubytování v Trollhättanu",
-        stayIntro: "V hotelu Scandic Swania jsme zajistili předem rezervovanou svatební cenu. Pokoje jsou k dispozici podle aktuální obsazenosti, proto doporučujeme rezervovat včas.",
+        stayIntro: "Pro ty, kteří by si chtěli rezervovat hotel, jsme ve Scandic Swania zajistili předem rezervovanou svatební cenu. Pokoje jsou k dispozici podle aktuální obsazenosti, proto doporučujeme rezervovat včas.",
+        singleRoomLabel: "Jednolůžkový pokoj",
+        doubleRoomLabel: "Dvoulůžkový pokoj",
+        breakfastIncluded: "Snídaně v ceně",
         recommendedHotel: "Doporučený hotel",
         bookingCode: "Rezervační kód",
         bookingDeadline: "Poslední den pro rezervaci",
-        deadlineDate: "26. listopadu 2027",
+        deadlineDate: "26. listopadu 2026",
         bookScandic: "Rezervovat ve Scandicu ↗",
         bookingStepsTitle: "Jak si rezervovat pokoj ve Scandicu",
         stayRule1: "Rezervaci proveďte přes scandichotels.com nebo telefonicky přes centrální rezervační kancelář na +46 8 517 517 00 a poté stiskněte 1.",
@@ -1666,8 +1635,8 @@
         stayRule4: "Platba proběhne při check-inu kreditní kartou.",
         stayRule5: "Pro garanci pokoje je při rezervaci nutné uvést údaje o kreditní kartě.",
         stayRule6: "Každý host provádí rezervaci samostatně a rezervace je vedena jako individuální.",
-        stayRule7: "Rezervaci lze změnit nebo zrušit do 18:00 v den příjezdu.",
-        stayRule8: "Při změně nebo zrušení po 18:00 má hotel právo požadovat úhradu rezervace.",
+        stayRule7: "Rezervaci lze změnit nebo zrušit do 18:00 dne před pobytem.",
+        stayRule8: "Při změně nebo zrušení po 18:00 dne před pobytem má hotel právo požadovat úhradu rezervace.",
         stayRule9: "Každý host obdrží při vytvoření rezervace vlastní potvrzení.",
         otherHotelsTitle: "Dáváte přednost jinému hotelu?",
         otherHotelsCopy: "Prohlédněte si další možnosti ubytování v Trollhättanu na svatební noc.",
@@ -1684,17 +1653,12 @@
         rsvpCopy: "Abychom mohli dokončit všechny přípravy, dejte nám prosím vědět, zda se svatby zúčastníte.",
         rsvpDeadlineLabel: "Prosíme o odpověď do",
         rsvpDeadlineDate: "31. října 2026",
-        rsvpButton: "Odeslat RSVP",
-        rsvpButtonShort: "RSVP",
-        rsvpNote: "V odpovědi prosím uveďte, kdo se zúčastní, a případná dietní omezení nebo jiné důležité poznámky. E-mail je adresován nám oběma.",
-        rsvpPhoneIntro: "Raději odpovíte telefonicky?",
         contactLabel: "Kontakt / RSVP",
-        emailBody: "Ahoj Marku a Theres,\n\nRSVP: [Přijdeme / Bohužel se nemůžeme zúčastnit]\nJména hostů:\nDietní omezení / poznámka:\n\nS pozdravem,",
         musicLoading: "Načítá se vánoční hudba",
         musicMute: "Ztlumit vánoční hudbu",
         musicPlay: "Přehrát vánoční hudbu",
         closingScript: "S láskou",
-        closingCopy: "Děkujeme, že jste součástí našich životů. Moc pro nás znamená, že budete s námi, když společně otevřeme tuto novou kapitolu."
+        closingCopy: "Těšíme se, že náš velký den oslavíme společně s vámi."
       },
       lb: {
         openInvitation: "افتحوا الدعوة",
@@ -1705,24 +1669,29 @@
         navTravel: "السفر",
         navRsvp: "تأكيد الحضور",
         heroKicker: "عيلة سبانيك وعيلة سعد",
-        heroRequest: "بكل فرح بيدعوكن لتكونوا معنا وتشهدوا وتحتفلوا بزواج",
+        heroRequest: "ببركة الله ومحبة العيلة والأصحاب، منَدعيكن من القلب تشاركونا فرحتنا وتحضروا سرّ الزواج المقدّس بين",
         heroDate: "12 كانون الأول 2026",
-        heroCopy: "من كل قلبنا، منكون كتير مبسوطين وممتنّين إذا شاركتونا هالنهار الشتوي، بين الناس اللي منحبّن أكتر شي.",
         viewDay: "شوفوا برنامج النهار",
         addCalendar: "ضيفوا على الروزنامة",
         dayScript: "نهار عرسنا",
         dayTitle: "مكانين، وفرحة وحدة",
-        dayIntro: "منكون كتير فرحانين وممتنّين إذا احتفلتوا معنا. المراسم بتبلّش بترولهيتان، وبعدها عشا، مشروبات ورقص بـ Folkets Park.",
+        dayIntro: "منكون كتير فرحانين وممتنّين إذا احتفلتوا معنا. المراسم بتبلّش بكنيسة St. Petri الكاثوليكية، وبعدها عشا ومشروبات ورقص بـ Folkets Park بترولهيتان، السويد — ومنتمنّى تضل الكاسات مليانة، والموسيقى عالية، وساحة الرقص عامرة طول الليل.",
+        arrivalBy: "منترجّى تكونوا موجودين قبل",
+        ceremonyBegins: "المراسم بتبلّش",
+        celebrationBegins: "السهرة",
         churchTitle: "مراسم الزواج",
         eveningTitle: "سهرة العرس",
         openMap: "افتحوا الخريطة ↗",
         stayScript: "خليكن قريب",
         stayTitle: "الإقامة بترولهيتان",
-        stayIntro: "أمّنّا سعر خاص ومسبق للعرس بفندق Scandic Swania. الغرف حسب التوفّر، فالأفضل تحجزوا بكّير.",
+        stayIntro: "للي حابين يحجزوا فندق، أمّنّا سعر خاص ومسبق للعرس بفندق Scandic Swania. الغرف حسب التوفّر، فالأفضل تحجزوا بكّير.",
+        singleRoomLabel: "غرفة لشخص واحد",
+        doubleRoomLabel: "غرفة لشخصين",
+        breakfastIncluded: "الفطور مشمول",
         recommendedHotel: "الفندق المقترح",
         bookingCode: "رمز الحجز",
         bookingDeadline: "آخر مهلة للحجز",
-        deadlineDate: "26 تشرين الثاني 2027",
+        deadlineDate: "26 تشرين الثاني 2026",
         bookScandic: "احجزوا بـ Scandic ↗",
         bookingStepsTitle: "كيف تحجزوا غرفتكن بـ Scandic",
         stayRule1: "احجزوا عبر scandichotels.com أو اتصلوا بمكتب الحجوزات المركزي على +46 8 517 517 00 وبعدين إكبسوا 1.",
@@ -1731,8 +1700,8 @@
         stayRule4: "الدفع بيكون وقت تسجيل الدخول بالبطاقة الائتمانية.",
         stayRule5: "لازم تعطوا معلومات البطاقة الائتمانية وقت الحجز لضمان الغرفة.",
         stayRule6: "كل حجز بينعمل بشكل فردي وبينحسب كحجز فردي.",
-        stayRule7: "فيكن تعدّلوا أو تلغوا الحجز لحد الساعة 18:00 بنهار الوصول.",
-        stayRule8: "إذا صار تعديل أو إلغاء بعد الساعة 18:00، للفندق الحق يطلب قيمة الحجز.",
+        stayRule7: "فيكن تعدّلوا أو تلغوا الحجز لحد الساعة 18:00 بالنهار اللي قبل الإقامة.",
+        stayRule8: "إذا صار تعديل أو إلغاء بعد الساعة 18:00 بالنهار اللي قبل الإقامة، للفندق الحق يطلب قيمة الحجز.",
         stayRule9: "كل ضيف بيستلم تأكيد خاص فيه وقت الحجز.",
         otherHotelsTitle: "بتفضّلوا فندق تاني؟",
         otherHotelsCopy: "شوفوا خيارات إقامة تانية بترولهيتان لليلة العرس.",
@@ -1749,35 +1718,23 @@
         rsvpCopy: "كرمال نقدر نكمّل الترتيبات الأخيرة، خبرونا إذا رح تقدروا تكونوا معنا.",
         rsvpDeadlineLabel: "منترجّى تأكيد الحضور قبل",
         rsvpDeadlineDate: "31 تشرين الأول 2026",
-        rsvpButton: "ابعثوا تأكيد الحضور",
-        rsvpButtonShort: "تأكيد الحضور",
-        rsvpNote: "وقت تردّوا، خبرونا مين رح يحضر وإذا في أي متطلبات غذائية أو ملاحظات مهمّة. الإيميل بيروح لإلنا التنين.",
-        rsvpPhoneIntro: "بتفضّلوا تردّوا عالتليفون؟",
-        contactLabel: "تواصل / تأكيد الحضور",
-        emailBody: "مرحبا مارك وتيريز،\n\nتأكيد الحضور: [رح نحضر / للأسف ما رح نقدر نحضر]\nأسماء الضيوف:\nمتطلبات غذائية / ملاحظات:\n\nمع المحبة،",
+        contactLabel: "تواصل",
         musicLoading: "عم تتحمّل موسيقى الميلاد",
         musicMute: "سكّروا صوت موسيقى الميلاد",
         musicPlay: "شغّلوا موسيقى الميلاد",
         closingScript: "مع المحبة",
-        closingCopy: "شكراً لأنكن جزء من حياتنا. وجودكن معنا بهالنهار بيعني إلنا كتير وإحنا عم نبلّش هالفصل الجديد سوا."
+        closingCopy: "ناطرين بفارغ الصبر نحتفل بيومنا الكبير معكن."
       }
     };
 
     const languageButtons = document.querySelectorAll('[data-lang]');
     const translatableElements = document.querySelectorAll('[data-i18n]');
-    const rsvpEmailLinks = document.querySelectorAll('[data-rsvp-email]');
     const musicToggle = document.getElementById('musicToggle');
     const invitationGate = document.getElementById('invitationGate');
     const openInvitationButton = document.getElementById('openInvitationButton');
     const openingEnvelope = document.getElementById('openingEnvelope');
     let currentLanguage = 'en';
 
-    function updateRsvpEmailLinks(dictionary) {
-      const recipients = 'marek.spanyik@vsb.cz,theressaa.ts@gmail.com';
-      const subject = 'RSVP Marek and Theres Wedding';
-      const href = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(dictionary.emailBody || translations.en.emailBody)}`;
-      rsvpEmailLinks.forEach((link) => { link.href = href; });
-    }
 
     function updateMusicAccessibility(dictionary) {
       if (!musicToggle) return;
@@ -1804,7 +1761,6 @@
         button.classList.toggle('active', isActive);
         button.setAttribute('aria-pressed', String(isActive));
       });
-      updateRsvpEmailLinks(dictionary);
       updateMusicAccessibility(dictionary);
       if (openInvitationButton) openInvitationButton.setAttribute('aria-label', dictionary.openInvitation || translations.en.openInvitation);
       try { localStorage.setItem('wedding-language', currentLanguage); } catch (error) { /* file:// privacy mode fallback */ }
@@ -1875,11 +1831,11 @@
       'BEGIN:VEVENT',
       'UID:marek-theres-wedding-20261212@invitation',
       'DTSTAMP:20260814T120000Z',
-      'DTSTART;TZID=Europe/Stockholm:20261212T173000',
+      'DTSTART;TZID=Europe/Stockholm:20261212T170000',
       'DTEND;TZID=Europe/Stockholm:20261213T010000',
       'SUMMARY:Marek & Theres — Wedding',
-      'LOCATION:Katolska kyrkan i Trollhättan / Folkets Park, Trollhättan, Sweden',
-      'DESCRIPTION:Wedding day in Trollhättan.\\n17:30 — Ceremony: Katolska kyrkan i Trollhättan, Kungsgatan 44, 461 34 Trollhättan.\\n19:00–01:00 — Evening celebration: Folkets Park, Kungsportsvägen 1, 461 39 Trollhättan.\\nAccommodation: Scandic Swania, Storgatan 47–49. Booking code: BMAR101226.\\nRSVP by 31 October 2026: marek.spanyik@vsb.cz and theressaa.ts@gmail.com.',
+      'LOCATION:St. Petri Catholic Church / Folkets Park, Trollhättan, Sweden',
+      'DESCRIPTION:Wedding day in Trollhättan.\n17:00 — Guests arrive at St. Petri Catholic Church, Kungsgatan 44, 461 34 Trollhättan.\n17:30 — Holy matrimony begins.\n18:00 — Guests arrive at Folkets Park, Kungsportsvägen 1, 461 39 Trollhättan.\n19:00–01:00 — Dinner, drinks and dancing.\nAccommodation: Scandic Swania, Storgatan 47–49. Single 1090 SEK / Double 1290 SEK, breakfast included. Booking code: BMAR101226. Last booking day: 26 November 2026.\nRSVP by 31 October 2026 via the wedding website.',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR'
@@ -1992,7 +1948,7 @@
       // 0-1s flap flip; 1.5-3.5s letter rises and returns;
       // 4-5s upper fold; 5-6s lower fold. Only then reveal the page.
       const revealDelay = 6600;
-      const removeDelay = 8900;
+      const removeDelay = 15400;
 
       window.setTimeout(() => {
         document.body.classList.remove('invitation-locked');
